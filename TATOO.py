@@ -350,13 +350,6 @@ for i in range(0,Nb):
 age_med_avg = np.median(arr_avgage, 0)
 std_age_avg = np.std(arr_avgage)
 
-
-tablefile = open("age.dat",'a')
-tablefile.write("{}$\pm${}\n".format(floatt3(age_med_avg),floatt3(std_age_avg)))
-
-agefile = open("table.dat",'a')
-agefile.write("{} & {} & {} & {} & {} & {} & {}$\pm${} & {} \\ \n".format(system,mstarobs,mp,protobs,smaobs,0.000,floatt3(age_med_avg),floatt3(std_age_avg), 0.000))
-
 print 'Estimated averaged age for',system,"=",age_med_avg,'+-',std_age_avg,'Myr'
 
 
