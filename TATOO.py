@@ -5,13 +5,13 @@ import matplotlib.pyplot as plt
 import random
 import sys
 from scipy.optimize import curve_fit
-from Function_3 import Find_4
-from Function_3 import func_sq 
-from Function_3 import func_lin
-from Function_3 import clean
-from Function_3 import Control_file
-from Function_3 import Is_empty
-from Function_3 import Find_age
+from Function import Find_4
+from Function import func_sq 
+from Function import func_lin
+from Function import clean
+from Function import Control_file
+from Function import Is_empty
+from Function import Find_age
 import argparse
 
 np.seterr(divide='ignore', invalid='ignore')
