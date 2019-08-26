@@ -1,7 +1,7 @@
 # TATOO
 Tidal-chronology Age esTimation tOOl
 
-This tool is specifically developped for massive close-in planetary systems => Mass planet > 0.5 Mjup and 0.5 < M_star/Msun < 1.0
+This tool is specifically developped for massive close-in planetary systems => Mass planet > 0.5 $M_{jup}$ and 0.5 < M_star/Msun < 1.0
 
 Input parameter: 
 1) Semi-major axis (SMA) in au 
