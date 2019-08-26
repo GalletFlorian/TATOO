@@ -93,7 +93,7 @@ Nbtest_limit = 100
 
 #Assess the robustness of the age estimation? When robust = 1, TATOO will randomly explore the vicinity of the 4
 #corner points. 
-robust = 1
+robust = 0
 
 #The minimum value of the spearmanr coefficient.
 coeflim = 0.7
