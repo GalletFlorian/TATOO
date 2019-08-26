@@ -8,7 +8,9 @@ Input parameter:
 2) Stellar rotation period (Prot) in days
 3) Mass of the planet in Mjup
 4) Mass of the star in Msun
+
 Optional
+
 5) Name of the system
 6) Error_Prot in days
 7) Error_SMA in au
