@@ -2,43 +2,34 @@ import numpy as np
 from scipy.interpolate import griddata
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-from math import log10
-from scipy import interpolate
-from scipy import interp
 import random
-import math
 import sys
-import os
-import os.path
-from scipy import stats
 from scipy.optimize import curve_fit
-from Function import Find_4
-from Function import func_sq 
-from Function import func_lin
-from Function import linear
-from Function import clean
-from Function import Control_file
-from Function import rsquared
-from Function import Is_empty
-from Function import Find_age
+from Function_3 import Find_4
+from Function_3 import func_sq 
+from Function_3 import func_lin
+from Function_3 import clean
+from Function_3 import Control_file
+from Function_3 import Is_empty
+from Function_3 import Find_age
 import argparse
 
 np.seterr(divide='ignore', invalid='ignore')
 
 
-def floatt(number) :
+def floatt3(number) :
     return "%.3f"%number
     
 def floatt2(number) :
     return "%.2f"%number
     
-def floatt3(number) :
+def floatt1(number) :
 	return "%.1f"%number
 	
 #List of pre-compiled age estimate couples 
 massstar = np.array([0.5,0.6,0.7,0.8,0.9,1.0])
 prot = np.array([2,4,6,8,10,11,12,13,14,15,16,17,18,19,20,22,24,26,28,30])
-sma = np.array([0.08,0.09,0.010,0.011,0.012,0.013,0.014,0.015,0.02,0.025,0.03,0.035,0.04,0.045,0.05,0.055,0.06,0.065,0.07,0.075,0.08,0.085,0.09,0.095])
+sma = np.array([0.008,0.009,0.010,0.011,0.012,0.013,0.014,0.015,0.02,0.025,0.03,0.035,0.04,0.045,0.05,0.055,0.06,0.065,0.07,0.075,0.08,0.085,0.09,0.095])
 
 size_mass = len(massstar)
 size_prot = len(prot)
@@ -49,13 +40,14 @@ size_sma = len(sma)
 # 2) Stellar rotation period (Prot) in days
 # 3) Mass of the planet in Mjup
 # 4) Mass of the star in Msun
+# Optional
 # 5) Name of the system
 # 6) Error_Prot in days
 # 7) Error_SMA in au
 
 if len(sys.argv) < 4:
-	print "Not enouth information"
-	print "TATOO needs: SMA_obs |  Prot_obs | M_planet | M_star | Name of the system | Error_P_rot | Error_SMA"
+	print("Not enouth information")
+	print("TATOO needs: SMA_obs |  Prot_obs | M_planet | M_star  (| Name of the system | Error_P_rot | Error_SMA)")
 	sys.exit()
 	
 
@@ -80,14 +72,14 @@ else:
 
 
 if (args.error_prot == None):
-	print "Standard Error_Prot = 0.4 days"
+	print("Standard Error_Prot = 0.4 days")
 	sigmarot = 0.4	
 else:
 	sigmarot = float(args.error_prot)
 
 
 if (args.error_sma == None):
-	print "Standard Error_SMA = 0.002 au"
+	print("Standard Error_SMA = 0.002 au")
 	sigmasma = 0.002	
 else:
 	sigmasma = float(args.error_sma)		
@@ -101,10 +93,14 @@ Nbtest_limit = 100
 
 #Assess the robustness of the age estimation? When robust = 1, TATOO will randomly explore the vicinity of the 4
 #corner points. 
-robust = 0
+robust = 1
 
 #The minimum value of the spearmanr coefficient.
-coeflim = 0.5
+coeflim = 0.7
+
+
+#Number of try before crash
+Nbtest_step_try = 3
 
 arr_agemod_min = []
 arr_agemod_max = []
@@ -124,7 +120,7 @@ for index_mass in range(0,size_mass-1):
 Nb = 0
 Nbtest = 0
 Nbtest_step = 0
-#for Nb in range(0,nstep):
+
 while Nb < nstep:
 
 	arr_ai = []
@@ -144,6 +140,7 @@ while Nb < nstep:
 	masss_list = [0.0,0.0,0.0,0.0] 	
 	coef_min = [0.0,0.0,0.0,0.0] 	
 	coef_max = [0.0,0.0,0.0,0.0] 	
+	
 	
 	#random exploration on P_rot and SMA given Error_Prot and Error_SMA
 	protrand = random.uniform(protobs-sigmarot,protobs+sigmarot)
@@ -173,11 +170,12 @@ while Nb < nstep:
 	#Control on the content of the Explo_* files. If empty, try to find the next non empty file.
 	smamin,protmin,smamax,protmax= Control_file(prot,sma,index_ref_prot,index_ref_sma,massstarmin,smamin,protmin,smamax,protmax)
 
+
 	#Estimating the spearman correlation coefficient + the age of each corner pre-compiled Explo_* files. Here for massstarmin 
-	coef_min[0] = Find_4(floatt(smamin),floatt2(protmin),mp,massstarmin,0,sma_list,prot_list,age_list,massp_list,masss_list)
-	coef_min[1] = Find_4(floatt(smamax),floatt2(protmin),mp,massstarmin,1,sma_list,prot_list,age_list,massp_list,masss_list)
-	coef_min[2] = Find_4(floatt(smamin),floatt2(protmax),mp,massstarmin,2,sma_list,prot_list,age_list,massp_list,masss_list)
-	coef_min[3] = Find_4(floatt(smamax),floatt2(protmax),mp,massstarmin,3,sma_list,prot_list,age_list,massp_list,masss_list)
+	coef_min[0] = Find_4(floatt3(smamin),floatt2(protmin),mp,massstarmin,0,sma_list,prot_list,age_list,massp_list,masss_list)
+	coef_min[1] = Find_4(floatt3(smamax),floatt2(protmin),mp,massstarmin,1,sma_list,prot_list,age_list,massp_list,masss_list)
+	coef_min[2] = Find_4(floatt3(smamin),floatt2(protmax),mp,massstarmin,2,sma_list,prot_list,age_list,massp_list,masss_list)
+	coef_min[3] = Find_4(floatt3(smamax),floatt2(protmax),mp,massstarmin,3,sma_list,prot_list,age_list,massp_list,masss_list)
 	
 	#Calling Find_age to perform the 3D interpolation
 	age_min = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
@@ -188,7 +186,6 @@ while Nb < nstep:
 
 	coef_min_f = np.mean(coef_min)
 
-
 	#Same procedure as above but for massstarmax
 	sma_list=clean(sma_list)
 	prot_list=clean(prot_list)
@@ -198,36 +195,40 @@ while Nb < nstep:
 	
 	smamin,protmin,smamax,protmax= Control_file(prot,sma,index_ref_prot,index_ref_sma,massstarmax,smamin,protmin,smamax,protmax)
 
-	coef_max[0] = Find_4(floatt(smamin),floatt2(protmin),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
-	coef_max[1] = Find_4(floatt(smamax),floatt2(protmin),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
-	coef_max[2] = Find_4(floatt(smamin),floatt2(protmax),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
-	coef_max[3] = Find_4(floatt(smamax),floatt2(protmax),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
+	coef_max[0] = Find_4(floatt3(smamin),floatt2(protmin),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
+	coef_max[1] = Find_4(floatt3(smamax),floatt2(protmin),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
+	coef_max[2] = Find_4(floatt3(smamin),floatt2(protmax),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
+	coef_max[3] = Find_4(floatt3(smamax),floatt2(protmax),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
 
 	age_max = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
+	
 	
 	if age_max >= 0.0:
 		flag_max = 1
 		arr_agemod_max.append(age_max) #for massstarmax
 	
 	coef_max_f = np.mean(coef_max)
-	
-	#Control on the spearman averaged coefficient. It is used to ensure a good enough linear relation between the estimated age and the 
+		
+	#Control on the Pearson averaged correlation coefficient. It is used to ensure a good enough linear relation between the estimated age and the 
 	#mass of the planet?
 	Nbtest = Nbtest + 1
 	if (abs(coef_min_f) > coeflim and abs(coef_max_f) > coeflim) and flag_max*flag_min == 1:
-		print Nb,arr_agemod_min[Nb],arr_agemod_max[Nb]
+		print (Nb,arr_agemod_min[Nb],arr_agemod_max[Nb],coef_min_f,coef_max_f)
 		Nb = Nb + 1
 		Nbtest = 0
 
 	
 	if Nbtest == Nbtest_limit:
-		print "Limit of",Nbtest_limit,"iterations reached for", system,". No linear relation between the age and the mass of the planet found!"
-		print "Try with reduced coeflim.", coeflim * 0.8
+		Nbtest_step = Nbtest_step + 1
+		if Nbtest_step > Nbtest_step_try:
+			print ("Number of crashes reached, stop.")
+			sys.exit()
+		print("Limit of {} iterations reached for {} and coeflim = {}. No linear relation between the age and the mass of the planet found!".format(Nbtest_limit,system,coeflim))
+		#print "Limit of",Nbtest_limit,"iterations reached for", system,"and coeflim =",coeflim, ". No linear relation between the age and the mass of the planet found!"
+		print ("Try with reduced coeflim of {}".format(coeflim*0.8))
 		Nbtest = 0
 		coeflim = coeflim * 0.8
-		Nbtest_step = Nbtest_step + 1
-		if Nbtest_step > 2:
-			sys.exit()
+		
 
 	
 ################### Robustness ###################
@@ -277,15 +278,19 @@ while Nb < nstep:
 		massp_list=clean(massp_list)
 		masss_list=clean(masss_list)
 
-		coef2_1 = Find_4(floatt(smaminrand),floatt2(protminrand),mp,massstarmin,0,sma_list,prot_list,age_list,massp_list,masss_list)
-		coef2_2 = Find_4(floatt(smamaxrand),floatt2(protminrand),mp,massstarmin,1,sma_list,prot_list,age_list,massp_list,masss_list)
-		coef2_3 = Find_4(floatt(smaminrand),floatt2(protmaxrand),mp,massstarmin,2,sma_list,prot_list,age_list,massp_list,masss_list)
-		coef2_4 = Find_4(floatt(smamaxrand),floatt2(protmaxrand),mp,massstarmin,3,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_min[0] = Find_4(floatt3(smaminrand),floatt2(protminrand),mp,massstarmin,0,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_min[1] = Find_4(floatt3(smamaxrand),floatt2(protminrand),mp,massstarmin,1,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_min[2] = Find_4(floatt3(smaminrand),floatt2(protmaxrand),mp,massstarmin,2,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_min[3] = Find_4(floatt3(smamaxrand),floatt2(protmaxrand),mp,massstarmin,3,sma_list,prot_list,age_list,massp_list,masss_list)
 
-		coef1 = (coef1_1 + coef1_2 + coef1_3 + coef1_4)/4.0
+		age_min = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
 	
+		if age_min >= 0.0:
+			flag_min = 1
+			arr_agemod_min_rand.append(age_min) #for massstarmin
 
-		arr_agemod_min_rand.append(Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)) #for massstarmin
+		coef_min_f = np.mean(coef_min)
+	
 
 		sma_list=clean(sma_list)
 		prot_list=clean(prot_list)
@@ -294,14 +299,18 @@ while Nb < nstep:
 		masss_list=clean(masss_list)
 
 
-		coef2_1 = Find_4(floatt(smaminrand),floatt2(protminrand),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
-		coef2_2 = Find_4(floatt(smamaxrand),floatt2(protminrand),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
-		coef2_3 = Find_4(floatt(smaminrand),floatt2(protmaxrand),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
-		coef2_4 = Find_4(floatt(smamaxrand),floatt2(protmaxrand),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_max[0] = Find_4(floatt3(smaminrand),floatt2(protminrand),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_max[1] = Find_4(floatt3(smamaxrand),floatt2(protminrand),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_max[2] = Find_4(floatt3(smaminrand),floatt2(protmaxrand),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_max[3] = Find_4(floatt3(smamaxrand),floatt2(protmaxrand),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
 
-		coef2 = (coef2_1 + coef2_2 + coef2_3 + coef2_4)/4.0
+		age_max = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
 
-		arr_agemod_max_rand.append(Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)) #for massstarmax
+		if age_max >= 0.0:
+			flag_max = 1
+			arr_agemod_max_rand.append(age_max) #for massstarmax
+	
+		coef_max_f = np.mean(coef_max)
 		
 		
 	
@@ -318,7 +327,7 @@ arr_avgage = []
 for i in range(0,Nb):
 	arr_age = [arr_agemod_min[i],arr_agemod_max[i]]
 	arr_masss = [massstarmin,massstarmax]
-	popt, pcov = curve_fit(linear, np.array(arr_masss), np.array(arr_age))
+	popt, pcov = curve_fit(func_lin, np.array(arr_masss), np.array(arr_age))
 	a = popt[0]
 	b = popt[1]
 	arr_avgage.append(a*mstarobs + b)
@@ -326,14 +335,7 @@ for i in range(0,Nb):
 age_med_avg = np.median(arr_avgage, 0)
 std_age_avg = np.std(arr_avgage)
 
-
-tablefile = open("age.dat",'a')
-tablefile.write("{}$\pm${}\n".format(floatt3(age_med_avg),floatt3(std_age_avg)))
-
-agefile = open("table.dat",'a')
-agefile.write("{} & {} & {} & {} & {} & {} & {}$\pm${} & {} \\ \n".format(system,mstarobs,mp,protobs,smaobs,0.000,floatt3(age_med_avg),floatt3(std_age_avg), 0.000))
-
-print 'Estimated averaged age for',system,"=",age_med_avg,'+-',std_age_avg,'Myr'
+print ("Estimated averaged age for {} = {} +- {} Myr with a spearman coefficient of {}.".format(system,age_med_avg,std_age_avg,coeflim))
 
 
 ##################################################
@@ -344,7 +346,7 @@ if robust == 1:
 	for i in range(0,Nb):
 		arr_age = [arr_agemod_min_rand[i],arr_agemod_max_rand[i]]
 		arr_masss = [massstarmin,massstarmax]
-		popt, pcov = curve_fit(linear, np.array(arr_masss), np.array(arr_age))
+		popt, pcov = curve_fit(func_lin, np.array(arr_masss), np.array(arr_age))
 		a = popt[0]
 		b = popt[1]
 		arr_avgage.append(a*mstarobs + b)
@@ -352,7 +354,5 @@ if robust == 1:
 	age_med_avg = np.median(arr_avgage, 0)
 	std_age_avg = np.std(arr_avgage)
 
-
-	print 'Robustness => estimated averaged age for',system,"=",age_med_avg,'+-',std_age_avg,'Myr'
-
-	
+	print ("Robustness: estimated averaged age for {} = {} +- {} Myr.".format(system,age_med_avg,std_age_avg))
+		
