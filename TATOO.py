@@ -95,6 +95,10 @@ Nbtest_limit = 100
 #corner points. 
 robust = 0
 
+#If you want to display the gyrochronological age based on the callibration of Delorme et al. (2011)
+gyro = 0
+
+
 #The minimum value of the spearmanr coefficient.
 coeflim = 0.7
 
@@ -355,4 +359,34 @@ if robust == 1:
 	std_age_avg = np.std(arr_avgage)
 
 	print ("Robustness: estimated averaged age for {} = {} +- {} Myr.".format(system,age_med_avg,std_age_avg))
+	
+	
+##################################################
+
+if gyro == 1:	
+	
+	JK_ = np.array([0.8654,0.8529,0.8419,0.8268,0.8023,0.7439,0.5936,0.4751,0.3670,0.3116,0.2622,0.2119,0.1673,0.1392])
+	flag_gyro = 0   
+	print(float(mstarobs))
+	for i in range(0,len(JK_)): 
+		if float(mstarobs) <= 0.1*(i+2) and flag_gyro==0:
+			a = (JK_[i]-JK_[i-1])/(0.1*(i+2) - (0.1*(i+1)))
+			b = JK_[i]-a*0.1*(i+2)
+			JK = a*mstarobs+b
+			flag_gyro = 1
+			print(i,JK,len(JK_))
 		
+	pow=1./0.56
+
+	avper=10.603
+	avcol=0.570
+	dxdy=12.314
+	age_clus=625.0
+
+	disp=0.45
+	per_c=avper+dxdy*(JK-avcol)
+	age_gyro=age_clus*(float(protobs)/per_c)**pow
+
+	print ("Age gyro = {}.".format(age_gyro))
+
+	
