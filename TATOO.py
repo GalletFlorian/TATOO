@@ -95,7 +95,7 @@ Nbtest_limit = 100
 #corner points. 
 robust = 0
 
-#If you want to display the gyrochronological age based on the callibration of Delorme et al. (2011)
+#If you want to display the gyrochronological age based on the calibration of Delorme et al. (2011)
 gyro = 0
 
 
