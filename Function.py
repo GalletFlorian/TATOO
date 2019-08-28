@@ -96,30 +96,37 @@ def Control_file(protin,smain,iprot,isma,mstar,smamin,protmin,smamax,protmax):
 			flag = Is_empty(mstar,smamax,protmin)	
 			protmin = prot[index_ref_prot-index]
 			index = index + 1
-			if index_ref_prot-index == 0:
+			if index_ref_prot-index <= 0:
 				flag_full = 1
 				index = 1
 		else:
+			if index_ref_sma+1+index >= size_sma:
+				print("No non empty pre-compiled file found. Stop")
+				exit()
+				
 			protmin = prot[index_ref_prot]
 			flag = Is_empty(mstar,smamax,protmin)	
-			smamax = sma[index_ref_sma+index]
-			index = index + 1	
-	
+			smamax = sma[index_ref_sma+1+index]
+			index = index + 1
+				
 	flag = Is_empty(mstar,smamax,protmax)	
 	flag_full = 0
 	index = 1 
 	while flag == 0:
 		if flag_full == 0:
 			flag = Is_empty(mstar,smamax,protmax)	
-			protmax = prot[index_ref_prot+index]
+			protmax = prot[index_ref_prot+1+index]
 			index = index + 1
-			if index_ref_prot+index == size_prot:
+			if index_ref_prot+1+index >= size_prot:
 				flag_full = 1
 				index = 1
 		else:
+			if index_ref_sma+1+index >= size_sma:
+				print("No non empty pre-compiled file found. Stop")
+				exit()
 			protmax = prot[index_ref_prot+1]
 			flag = Is_empty(mstar,smamax,protmax)	
-			smamax = sma[index_ref_sma+index]
+			smamax = sma[index_ref_sma+1+index]
 			index = index + 1	
 	
 	
@@ -132,13 +139,15 @@ def Control_file(protin,smain,iprot,isma,mstar,smamin,protmin,smamax,protmax):
 			flag = Is_empty(mstar,smamin,protmin)	
 			protmin = prot[index_ref_prot-index]
 			index = index + 1
-			if index_ref_prot-index == 0:
+			if index_ref_prot-index <= 0:
 				flag_full = 1
 				index = 1
 		else:
+			if index_ref_sma-index <= size_sma:
+				print("No non empty pre-compiled file found. Stop")
+				exit()
 			protmin = prot[index_ref_prot]
 			flag = Is_empty(mstar,smamin,protmin)	
-			print (sma[index_ref_sma-index])
 			smamin = sma[index_ref_sma-index]
 			index = index + 1		
 		
@@ -148,12 +157,15 @@ def Control_file(protin,smain,iprot,isma,mstar,smamin,protmin,smamax,protmax):
 	while flag == 0:
 		if flag_full == 0:
 			flag = Is_empty(mstar,smamin,protmax)	
-			protmax = prot[index_ref_prot+index]
+			protmax = prot[index_ref_prot+1+index]
 			index = index + 1
-			if index_ref_prot+index == size_prot:
+			if index_ref_prot+1+index >= size_prot:
 				flag_full = 1
 				index = 1
 		else:
+			if index_ref_sma-index <= size_sma:
+				print("No non empty pre-compiled file found. Stop")
+				exit()
 			protmax = prot[index_ref_prot+1]
 			flag = Is_empty(mstar,smamin,protmax)	
 			smamin = sma[index_ref_sma-index]
