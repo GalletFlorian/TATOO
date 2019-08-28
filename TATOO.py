@@ -331,7 +331,7 @@ arr_avgage = []
 for i in range(0,Nb):
 	arr_age = [arr_agemod_min[i],arr_agemod_max[i]]
 	arr_masss = [massstarmin,massstarmax]
-	popt, pcov = curve_fit(func_lin, np.array(arr_masss), np.array(arr_age))
+	popt = np.polyfit(np.array(arr_masss), np.array(arr_age),1)
 	a = popt[0]
 	b = popt[1]
 	arr_avgage.append(a*mstarobs + b)
@@ -350,7 +350,7 @@ if robust == 1:
 	for i in range(0,Nb):
 		arr_age = [arr_agemod_min_rand[i],arr_agemod_max_rand[i]]
 		arr_masss = [massstarmin,massstarmax]
-		popt, pcov = curve_fit(func_lin, np.array(arr_masss), np.array(arr_age))
+		popt = np.polyfit(np.array(arr_masss), np.array(arr_age),1)
 		a = popt[0]
 		b = popt[1]
 		arr_avgage.append(a*mstarobs + b)
