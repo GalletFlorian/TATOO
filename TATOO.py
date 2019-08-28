@@ -95,7 +95,7 @@ Nbtest_limit = 100
 #corner points. 
 robust = 0
 
-#If you want to display the gyrochronological age based on the calibration of Delorme et al. (2011)
+#If you want to display the gyrochronological age based on the calibration of Delorme et al. (2011) MNRAS, 413, 2218
 gyro = 0
 
 
@@ -365,6 +365,7 @@ if robust == 1:
 
 if gyro == 1:	
 	
+	#Based on the calibration from Delorme et al. (2011) MNRAS, 413, 2218
 	JK_ = np.array([0.8654,0.8529,0.8419,0.8268,0.8023,0.7439,0.5936,0.4751,0.3670,0.3116,0.2622,0.2119,0.1673,0.1392])
 	flag_gyro = 0   
 	print(float(mstarobs))
