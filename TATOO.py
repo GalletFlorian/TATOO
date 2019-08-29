@@ -368,7 +368,6 @@ if gyro == 1:
 	#Based on the calibration from Delorme et al. (2011) MNRAS, 413, 2218
 	JK_ = np.array([0.8654,0.8529,0.8419,0.8268,0.8023,0.7439,0.5936,0.4751,0.3670,0.3116,0.2622,0.2119,0.1673,0.1392])
 	flag_gyro = 0   
-	print(float(mstarobs))
 	for i in range(0,len(JK_)): 
 		if float(mstarobs) <= 0.1*(i+2) and flag_gyro==0:
 			a = (JK_[i]-JK_[i-1])/(0.1*(i+2) - (0.1*(i+1)))
