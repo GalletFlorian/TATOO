@@ -1,5 +1,5 @@
 # TATOO
-Tidal-chronology Age esTimation tOOl
+Tidal-chronology Age TOOl
 
 This tool is specifically developped for massive close-in planetary systems => Mass planet > 0.5 M_jup and 0.5 < M_star/Msun < 1.0
 
