@@ -10,6 +10,8 @@ This file contain six folders (0.5Msol | 0.6Msol | 0.7Msol | 0.8Msol | 0.9Msol |
 In each of them there are 480 files named Explo_100_sma_prot_sort.dat
 
 
+Requested packages
+
 numpy
 scipy
 matplotlib
