@@ -375,7 +375,6 @@ if gyro == 1:
 			b = JK_[i]-a*0.1*(i+2)
 			JK = a*mstarobs+b
 			flag_gyro = 1
-			print(i,JK,len(JK_))
 		
 	pow=1./0.56
 
