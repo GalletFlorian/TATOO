@@ -27,10 +27,7 @@ ________________  Resquested file  ________________
 
 Dowload the pre-compiled exploration files here (Data.tar.gz | 343.9 Mo).
 
-https://share.orange.fr/#yBC3ycDIV23f0e138a24
-
-
-Its in French: first clic on the file, then on the "Télécharger" button.
+https://drive.google.com/open?id=1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
 
 This file contain six folders (0.5Msol | 0.6Msol | 0.7Msol | 0.8Msol | 0.9Msol | 1.0Msol). 
 
