@@ -37,6 +37,8 @@ To download the file from Google Drive via command line, an easy way is to use g
 
 In your terminal 
 pip install gdown
+
+Then use this command line
 gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
 
 
