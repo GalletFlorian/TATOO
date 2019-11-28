@@ -1,10 +1,10 @@
 import numpy as np
 import random
 import sys
-from Function_3 import Find_4
-from Function_3 import clean
-from Function_3 import Control_file
-from Function_3 import Find_age
+from Function import Find_4
+from Function import clean
+from Function import Control_file
+from Function import Find_age
 from tkinter import * 
 from tkinter import ttk
 
