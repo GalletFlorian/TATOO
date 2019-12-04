@@ -23,6 +23,46 @@ Example
 
 python TATOO.py 0.01560 15.6 2.052 0.71 WASP-43 0.4 0.002
 
+Installation
+============
+
+Currently the best way to install *TATOO* is from github.
+
+.. code-block:: bash
+    git clone https://github.com/GalletFlorian/TATOO.git
+    cd TATOO
+    python setup.py install
+
+Dependencies
+------------
+
+The dependencies of *TATOO* are
+`NumPy <http://www.numpy.org/>`_,
+`scipy <https://www.scipy.org/>`_,
+`matplotlib <https://matplotlib.org/>`_ and
+`tkinter <https://wiki.python.org/moin/TkInter>`_.
+
+
+These can be installed using pip:
+
+.. code-block:: bash
+
+    pip install numpy scipy matplotlib
+
+.. You'll also need to download the data:
+
+.. .. code-block:: bash
+
+..     git clone https://github.com/timothydmorton/isochrones
+..     cd isochrones
+..     python setup.py install
+
+You can check out the
+`isochrones <https://isochrones.readthedocs.io/en/latest/index.html>`_
+documentation if you run into difficulties installing that.
+
+
+
 ________________  Resquested file  ________________
 
 Dowload the pre-compiled exploration files here (Data.tar.gz | 343.9 Mo).
