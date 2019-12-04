@@ -10,5 +10,5 @@ setup(name='TATOO_code',
       author_email='florian.gallet@gmail.com',
       license='CNES/CNRS',
       packages=['TATOO'],
-      install_requires=['numpy', 'scipy', 'matplotlib', 'random', 'math', 'stats'],
+      install_requires=['numpy', 'scipy', 'matplotlib'],
       zip_safe=False)
