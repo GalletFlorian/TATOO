@@ -3,6 +3,8 @@ Tidal-chronology Age TOOl
 
 This tool is specifically developped for massive close-in planetary systems => Mass planet > 0.5 M_jup and 0.5 < M_star/Msun < 1.0
 
+:math:`\\frac{1}{1}`
+
 Input parameter: 
 
 1) Semi-major axis (SMA) in au 
