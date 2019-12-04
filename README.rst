@@ -51,6 +51,14 @@ These can be installed using pip:
 
     pip install numpy scipy matplotlib
 
+For tkinter (used for the GUI version of *TATOO*) I recommand you to use Anaconda 
+
+.. code-block:: bash
+
+    conda install tkinter
+Data
+====
+
 You'll also need to download the pre-compiled exploration files (Data.tar.gz | 343.9 Mo).
 
 To download the file from Google Drive via command line, an easy way is to use gdown (https://github.com/circulosmeos/gdown.pl). You can install it via pip:
