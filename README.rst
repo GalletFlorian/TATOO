@@ -1,14 +1,14 @@
 # TATOO
 Tidal-chronology Age TOOl
 
-This tool is specifically developped for massive close-in planetary systems: Mass planet > 0.5 M\ :sub:`jup`\ and 0.5 < M\ :sub:`star`\/M\ :sub:`sun`\ < 1.0
+This tool is specifically developped for massive close-in planetary systems: Mass planet > 0.5 M\ :sub:`jup`\  and 0.5 < M\ :sub:`star`\/M\ :sub:`sun`\  < 1.0
 
 Input parameter: 
 
 1) Semi-major axis (SMA) in au 
 2) Stellar rotation period (P\ :sub:`rot`\) in days
-3) Mass of the planet in Mjup
-4) Mass of the star in Msun
+3) Mass of the planet in M\ :sub:`jup`\  
+4) Mass of the star in M\ :sub:`sun`\  
 
 Optional
 
