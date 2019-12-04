@@ -54,6 +54,7 @@ You'll also need to download the pre-compiled exploration files (Data.tar.gz | 3
 To download the file from Google Drive via command line, an easy way is to use gdown (https://github.com/circulosmeos/gdown.pl). You can install it via pip:
 
 .. code-block:: bash
+    
     pip install gdown
     gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
 
@@ -63,3 +64,8 @@ In each of them there are 480 files named Explo_100_sma_prot_sort.dat
 
 
 
+.. https://drive.google.com/open?id=1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
+
+.. The id of the file is
+
+.. id = 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
