@@ -4,6 +4,7 @@ Tidal-chronology Age TOOl
 This tool is specifically developped for massive close-in planetary systems => Mass planet > 0.5 M_jup and 0.5 < M_star/Msun < 1.0
 
 Input parameter: 
+
 1) Semi-major axis (SMA) in au 
 2) Stellar rotation period (Prot) in days
 3) Mass of the planet in Mjup
@@ -29,6 +30,7 @@ Installation
 Currently the best way to install *TATOO* is from github.
 
 .. code-block:: bash
+    
     git clone https://github.com/GalletFlorian/TATOO.git
     cd TATOO
     python setup.py install
