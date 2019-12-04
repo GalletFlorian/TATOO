@@ -62,8 +62,6 @@ This file contain six folders (0.5Msol | 0.6Msol | 0.7Msol | 0.8Msol | 0.9Msol |
 
 In each of them there are 480 files named Explo_100_sma_prot_sort.dat
 
-
-
 .. https://drive.google.com/open?id=1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
 
 .. The id of the file is
