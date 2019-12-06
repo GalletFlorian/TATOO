@@ -1,10 +1,10 @@
 import numpy as np
 import random
 import sys
-from Function import Find_4
-from Function import clean
-from Function import Control_file
-from Function import Find_age
+from Function_3 import Find_4
+from Function_3 import clean
+from Function_3 import Control_file
+from Function_3 import Find_age
 from tkinter import * 
 from tkinter import ttk
 
@@ -30,7 +30,8 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
     size_prot = len(prot)
     size_sma = len(sma)
 	
-		
+    global flag_empty
+    flag_empty = 0
 	
 	#Input parameter: 
 	# 1) Semi-major axis (SMA) in au 
@@ -161,9 +162,11 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
 	
 	
         #Control on the content of the Explo_* files. If empty, try to find the next non empty file.
-        smamin,protmin,smamax,protmax= Control_file(prot,sma,index_ref_prot,index_ref_sma,massstarmin,smamin,protmin,smamax,protmax)
-	
-	
+        smamin,protmin,smamax,protmax,flag_empty= Control_file(frame_result,prot,sma,index_ref_prot,index_ref_sma,massstarmin,smamin,protmin,smamax,protmax)
+
+        if (flag_empty == 1):
+            return 0.0,0.0,0.0
+        
         #Estimating the spearman correlation coefficient + the age of each corner pre-compiled Explo_* files. Here for massstarmin 
         coef_min[0] = Find_4(floatt3(smamin),floatt2(protmin),mp,massstarmin,0,sma_list,prot_list,age_list,massp_list,masss_list)
         coef_min[1] = Find_4(floatt3(smamax),floatt2(protmin),mp,massstarmin,1,sma_list,prot_list,age_list,massp_list,masss_list)
@@ -186,8 +189,12 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
         massp_list=clean(massp_list)
         masss_list=clean(masss_list)
 		
-        smamin,protmin,smamax,protmax= Control_file(prot,sma,index_ref_prot,index_ref_sma,massstarmax,smamin,protmin,smamax,protmax)
-	
+
+        smamin,protmin,smamax,protmax,flag_empty= Control_file(frame_result,prot,sma,index_ref_prot,index_ref_sma,massstarmax,smamin,protmin,smamax,protmax)
+
+        if (flag_empty == 1):
+            return 0.0,0.0,0.0
+        	
         coef_max[0] = Find_4(floatt3(smamin),floatt2(protmin),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
         coef_max[1] = Find_4(floatt3(smamax),floatt2(protmin),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
         coef_max[2] = Find_4(floatt3(smamin),floatt2(protmax),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
@@ -214,9 +221,14 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
         if Nbtest == Nbtest_limit:
             Nbtest_step = Nbtest_step + 1
             if Nbtest_step > Nbtest_step_try:
-                print ("Number of crashes reached, stop.")
-                sys.exit()
-            print("Limit of {} iterations reached for {} and coeflim = {}. No linear relation between the age and the mass of the planet found!".format(Nbtest_limit,system,coeflim))
+                print ("Number {} of crashes reached, stop.",Nbtest_step_try)
+                
+                charwarning = "Number "+str(Nbtest_step_try)+" of crashes reached, stop."
+                Label(frame_result,text=charwarning).grid(row=0)
+
+                #frame_result.update_idletasks()
+                return 0.0,0.0,0.0
+            print("Limit of {} iterations reached for the system and coeflim = {}. No linear relation between the age and the mass of the planet found!".format(Nbtest_limit,coeflim))
             #print "Limit of",Nbtest_limit,"iterations reached for", system,"and coeflim =",coeflim, ". No linear relation between the age and the mass of the planet found!"
             print ("Try with reduced coeflim of {}".format(coeflim*0.95))
             Nbtest = 0
@@ -371,7 +383,7 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
         age_gyro=age_clus*(float(protobs)/per_c)**pow
 	
         #print ("Age gyro = {} Myr.".format(age_gyro))
-        #print("Change = {}.".format(abs( age_med_avg -age_gyro)/abs(0.5*(age_med_avg+age_gyro))*100.0))
+        print("Change = {}.".format(abs( age_med_avg -age_gyro)/abs(0.5*(age_med_avg+age_gyro))*100.0))
         #change = abs(age_med_avg -age_gyro)/abs(0.5*(age_med_avg+age_gyro))*100.0
 		
         #agefile = open("table.dat",'a')

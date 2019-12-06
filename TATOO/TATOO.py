@@ -47,7 +47,7 @@ size_sma = len(sma)
 
 if len(sys.argv) < 4:
 	print("Not enouth information")
-	print("TATOO needs: SMA_obs |  Prot_obs | M_planet | M_star  (| Name of the system | Error_P_rot | Error_SMA)")
+	print("TATOO needs: Porb_obs |  Prot_obs | M_planet | M_star  (| Name of the system | Error_P_rot | Error_SMA)")
 	sys.exit()
 	
 
@@ -55,15 +55,21 @@ parser = argparse.ArgumentParser()
 parser.add_argument('input', nargs=4)
 parser.add_argument('system',nargs='?')
 parser.add_argument('error_prot',nargs='?')
-parser.add_argument('error_sma',nargs='?')
+parser.add_argument('error_porb',nargs='?')
 
 args = parser.parse_args()
 
-smaobs = float(args.input[0])
+porbobs = float(args.input[0])
 protobs = float(args.input[1])
 mp = float(args.input[2])
 mstarobs = float(args.input[3])
 
+G = 6.6742367e-11
+Mjup = 1.8986112e27    
+Msun = 1.98892e30 
+pi = 3.14159265359
+
+smaobs =  ( (porbobs * 24.*3600. / (2*pi))**2.0 * G * (mstarobs*Msun+mp*Mjup))**(1./3.) / 1.49598e11
 
 if (args.system == None):
 	system = "Unknown_system"
@@ -78,11 +84,12 @@ else:
 	sigmarot = float(args.error_prot)
 
 
-if (args.error_sma == None):
-	print("Standard Error_SMA = 0.002 au")
-	sigmasma = 0.002	
+if (args.error_porb == None):
+	print("Standard Error_Porb = 0.002 au")
+	sigmasma = 0.001	
 else:
-	sigmasma = float(args.error_sma)		
+	sigmaporb = float(args.error_porb)	
+	sigmasma =  ( (sigmaporb * 24.*3600. / (2*pi))**2.0 * G * (mstarobs*Msun+mp*Mjup))**(1./3.) / 1.49598e11	
 
 
 #Number of age estimations for a given system. 

@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib
+matplotlib.use("TkAgg")
 from matplotlib import pyplot as plt
 from tkinter import * 
 from tkinter import ttk
@@ -40,7 +41,7 @@ def message(msg):
     download_message.grid(row=1)
     frame_result.update_idletasks()
 
-
+download_message = Label(frame_result)
 def download():
     global download_message 
     #download_message = Label(frame_result)
@@ -181,23 +182,33 @@ def run():
         _porb = float(porb.get())
         _sma =  ( (_porb * 24.*3600. / (2*pi))**2.0 * G * (_mstar*Msun+_mp*Mjup))**(1./3.) / 1.49598e11
         _e_porb = float(e_porb.get())
-        _e_sma =  ( (_e_porb * 24.*3600. / (2*pi))**2.0 * G * (_mstar*Msun))**(1./3.) / 1.49598e11
+        _e_sma =  ( (_e_porb * 24.*3600. / (2*pi))**2.0 * G * (_mstar*Msun+_mp*Mjup))**(1./3.) / 1.49598e11
         age, e_age, age_gyro = TATOO(frame_result,_mstar,_prot,_e_prot,_mp,_sma,_e_sma, " ", _gyro_var, _robust_var, coeflim_var,nbstep_var)    
         global labelage_gyro
+        global labelage_tidal
         if (_gyro_var == 1):
-            charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
-            charage_gyro = "Age_gyro = "+str(round(age_gyro,2))+" Myr"
-            Label(frame_result,text=charage).grid(row=0)
-        
-            labelage_gyro = Label(frame_result,text=charage_gyro)
-            labelage_gyro.grid(row=1)
+            if (age > 0.0):
+                charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
+                charage_gyro = "Age_gyro = "+str(round(age_gyro,2))+" Myr"
+                labelage_tidal = Label(frame_result,text=charage)
+                labelage_tidal.grid(row=0)
+                
+                labelage_gyro = Label(frame_result,text=charage_gyro)
+                labelage_gyro.grid(row=1)
+            else:
+                labelage_tidal.destroy()
+                labelage_gyro.destroy()
+                download_message.destroy()
+                frame_result.update_idletasks()
         else:   
-            charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
-            Label(frame_result,text=charage).grid(row=0)
-            labelage_gyro.destroy()
-            download_message.destroy()
-    
-        #Label.pack()
+            if (age > 0.0):
+                charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
+                labelage_tidal = Label(frame_result,text=charage).grid(row=0)
+                labelage_tidal.grid(row=0)
+                
+                labelage_gyro.destroy()
+                download_message.destroy()
+
     else:
         Label(frame_result,text="Download data first").grid(row=1)
 
@@ -220,12 +231,6 @@ Button(frame2,text='Run',command=run).grid(row=0,column=3, sticky = W)
 Button(frame2,text='Control',command=saisie).grid(row=0,column=4,sticky = W)
 Button(frame2,text='Quit',command=master.quit).grid(row=0,column=5,sticky = W)
 
-
-
 master.mainloop()
-
-
-
-
 
 master.destroy()
