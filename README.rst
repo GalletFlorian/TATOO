@@ -5,7 +5,7 @@ This tool is specifically developped for massive close-in planetary systems: Mas
 
 Input parameter: 
 
-1) Semi-major axis (SMA) in au 
+1) Planeatry orbitla period (P\ :sub:`orb`\) in days
 2) Stellar rotation period (P\ :sub:`rot`\) in days
 3) Mass of the planet in M\ :sub:`jup`\  
 4) Mass of the star in M\ :sub:`sun`\  
@@ -14,7 +14,7 @@ Optional
 
 5) Name of the system
 6) Error_Prot in days
-7) Error_SMA in au
+7) Error_Porb in days
 
 
 Return the age of the system!
@@ -22,7 +22,7 @@ Return the age of the system!
 
 Example 
 
-python TATOO.py 0.01560 15.6 2.052 0.71 WASP-43 0.4 0.002
+python TATOO.py 0.84 15.6 2.052 0.71 WASP-43 0.4 0.002
 
 Installation
 ============
