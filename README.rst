@@ -10,7 +10,7 @@ Input parameter:
 3) Mass of the planet in M\ :sub:`jup`\  
 4) Mass of the star in M\ :sub:`sun`\  
 
-Optional
+Optional:
 
 5) Name of the system
 6) Error_Prot in days
