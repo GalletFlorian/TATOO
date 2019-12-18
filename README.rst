@@ -1,7 +1,7 @@
 # TATOO
 Tidal-chronology Age TOOl
 
-This tool is specifically developped for massive close-in planetary systems: Mass planet > 0.5 M\ :sub:`jup`\  and 0.5 < M\ :sub:`star`\/M\ :sub:`sun`\  < 1.0
+This tool is specifically developed for massive close-in planetary systems: Mass planet > 0.5 M\ :sub:`jup`\  and 0.5 < M\ :sub:`star`\/M\ :sub:`sun`\  < 1.0
 
 Input parameter: 
 
