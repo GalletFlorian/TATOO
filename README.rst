@@ -5,7 +5,7 @@ This tool is specifically developed for massive close-in planetary systems: Mass
 
 Input parameter: 
 
-1) Planeatry orbitla period (P\ :sub:`orb`\) in days
+1) Planetary orbitla period (P\ :sub:`orb`\) in days
 2) Stellar rotation period (P\ :sub:`rot`\) in days
 3) Mass of the planet in M\ :sub:`jup`\  
 4) Mass of the star in M\ :sub:`sun`\  
