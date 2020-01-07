@@ -85,8 +85,8 @@ else:
 
 
 if (args.error_porb == None):
-	print("Standard Error_Porb = 0.002 au")
-	sigmasma = 0.001	
+	print("Standard Error_Porb = 1e-3 days")
+	sigmasma = 0.002	
 else:
 	sigmaporb = float(args.error_porb)	
 	sigmasma =  ( (sigmaporb * 24.*3600. / (2*pi))**2.0 * G * (mstarobs*Msun+mp*Mjup))**(1./3.) / 1.49598e11	
