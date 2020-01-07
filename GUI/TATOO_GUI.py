@@ -62,13 +62,11 @@ def download():
         message("Extraction done.")
         time.sleep(0.4)
         download_message.destroy()
-    
-
-    
+        
 def help_tatoo():
     print("© Florian Gallet 2019")
     print("Gallet 2020,A&A")
-    webbrowser.open_new(r"https://github.com/GalletFlorian/TATOO/blob/master/README.md")
+    webbrowser.open_new(r"https://github.com/GalletFlorian/TATOO/blob/master/README.rst")
 
 menubar = Menu(master)
 
@@ -78,15 +76,16 @@ menu1.add_separator()
 menu1.add_command(label="Quit", command=master.quit)
 menubar.add_cascade(label="File", menu=menu1)
 
-menu2 = Menu(menubar, tearoff=0)
-menu2.add_command(label="Tbc", command=alert)
-menu2.add_command(label="Tbc", command=alert)
-menu2.add_command(label="Tbc", command=alert)
-menubar.add_cascade(label="Edit", menu=menu2)
+#Not included yet
+#menu2 = Menu(menubar, tearoff=0)
+#menu2.add_command(label="Tbc", command=alert)
+#menu2.add_command(label="Tbc", command=alert)
+#menu2.add_command(label="Tbc", command=alert)
+#menubar.add_cascade(label="Edit", menu=menu2)
 
-menu3 = Menu(menubar, tearoff=0)
-menu3.add_command(label="About", command=help_tatoo)
-menubar.add_cascade(label="Help", menu=menu3)
+#menu3 = Menu(menubar, tearoff=0)
+#menu3.add_command(label="About", command=help_tatoo)
+#menubar.add_cascade(label="Help", menu=menu3)
 
 master.config(menu=menubar)
 
@@ -169,9 +168,7 @@ def run():
             nbstep_var = 10
         else:
             nbstep_var = float(nbstep_var)
-                
-            #gyro_var = gyro.get()  
-            #robust_var = gyro.get()    
+                 
         _gyro_var = gyro_var.get()
         _robust_var = robust_var.get()
     
@@ -210,8 +207,8 @@ def run():
                 download_message.destroy()
 
     else:
-        Label(frame_result,text="Download data first").grid(row=1)
-
+        message("Download data first")
+ 
 
 gyro_var = IntVar(value=1)
 Checkbutton(frame1, text="Gyro", variable=gyro_var).grid(row=4,column=0,sticky = W)

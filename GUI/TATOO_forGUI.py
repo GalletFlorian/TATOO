@@ -1,15 +1,14 @@
 import numpy as np
 import random
 import sys
-from Function_3 import Find_4
-from Function_3 import clean
-from Function_3 import Control_file
-from Function_3 import Find_age
+from Function import Find_4
+from Function import clean
+from Function import Control_file
+from Function import Find_age
 from tkinter import * 
 from tkinter import ttk
 
 np.seterr(divide='ignore', invalid='ignore')
-
 
 def floatt3(number) :
     return "%.3f"%number
@@ -95,8 +94,8 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
             massstarmax = massstar[index_mass+1]
 			
 			
-            #For each requested systems, performs nstep loops to generate random SMA and Prot within their uncertainties
-            #It is used to get the median and the standard deviation for the age estimation 
+    #For each requested systems, performs nstep loops to generate random SMA and Prot within their uncertainties
+	#It is used to get the median and the standard deviation for the age estimation 
 
     Nb = 0
     Nbtest = 0
@@ -104,16 +103,12 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
     
     
     progress_var = DoubleVar() #here you have ints but when calc. %'s usually floats
-
     progressbar = ttk.Progressbar(frame_result, variable=progress_var, maximum=nstep).grid(row=0)
-    #progressbar.pack(fill=X, expand=1)
 
     def loop_function(test):
         k = int(test)
         progress_var.set(k)
         frame_result.update_idletasks()
-        #root.after(100, loop_function)
-
 	
     while Nb < nstep:
         
@@ -160,7 +155,6 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
         massp_list=clean(massp_list)
         masss_list=clean(masss_list)
 	
-	
         #Control on the content of the Explo_* files. If empty, try to find the next non empty file.
         smamin,protmin,smamax,protmax,flag_empty= Control_file(frame_result,prot,sma,index_ref_prot,index_ref_sma,massstarmin,smamin,protmin,smamax,protmax)
 
@@ -189,7 +183,6 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
         massp_list=clean(massp_list)
         masss_list=clean(masss_list)
 		
-
         smamin,protmin,smamax,protmax,flag_empty= Control_file(frame_result,prot,sma,index_ref_prot,index_ref_sma,massstarmax,smamin,protmin,smamax,protmax)
 
         if (flag_empty == 1):
@@ -338,7 +331,6 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
 	
     #print ("Estimated averaged age for {} = {} +- {} Myr with a spearman coefficient of {}.".format(system,age_med_avg,std_age_avg,coeflim))
 	
-	
 	##################################################
 	
     if robust == 1:
@@ -381,11 +373,7 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
         disp=0.45
         per_c=avper+dxdy*(JK-avcol)
         age_gyro=age_clus*(float(protobs)/per_c)**pow
-	
-        #print ("Age gyro = {} Myr.".format(age_gyro))
-        print("Change = {}.".format(abs( age_med_avg -age_gyro)/abs(0.5*(age_med_avg+age_gyro))*100.0))
-        #change = abs(age_med_avg -age_gyro)/abs(0.5*(age_med_avg+age_gyro))*100.0
-		
-        #agefile = open("table.dat",'a')
-        #agefile.write("{} & {} & {} & {} & {} & {} & {}$\pm${} & {} & {} \\\\ \n".format(system,mstarobs,mp,protobs,smaobs,floatt2(age_gyro),floatt3(age_med_avg),floatt3(std_age_avg), floatt3(change) , coeflim))
+
+        print("Change = {}.".format(abs( age_med_avg -age_gyro)/abs(0.5*(age_med_avg+age_gyro))*100.0))	
+       
     return age_med_avg,std_age_avg, age_gyro
