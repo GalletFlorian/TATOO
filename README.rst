@@ -24,6 +24,15 @@ Example
 
 python TATOO.py 0.84 15.6 2.052 0.71 WASP-43 0.4 0.002
 
+Two ways
+========
+
+You can either use TATOO in command line using the TATOO folder.
+
+Or to use a Graphical User Interface (GUI) with the GUI folder. 
+
+This latter will need tkinter that is easily installed using Anaconda.
+
 Installation
 ============
 
