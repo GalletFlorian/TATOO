@@ -90,6 +90,6 @@ In each of them there are 480 files named Explo_100_sma_prot_sort.dat
 GUI
 ===
 
-.. image:: https://raw.githubusercontent.com/GalletFlorian/TATOO/master/docs/GUI.png?sanitize=true
+.. image:: https://raw.githubusercontent.com/GalletFlorian/TATOO/master/docs/GUI.png
 
 
