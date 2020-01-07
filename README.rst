@@ -86,3 +86,10 @@ In each of them there are 480 files named Explo_100_sma_prot_sort.dat
 .. The id of the file is
 
 .. id = 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
+
+GUI
+===
+
+.. image:: https://raw.githubusercontent.com/GalletFlorian/TATOO/master/docs/_static/GUI.tiff?sanitize=true
+   :width: 40%
+
