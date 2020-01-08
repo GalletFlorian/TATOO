@@ -27,7 +27,7 @@ Example
 python TATOO.py 0.84 15.6 2.052 0.71 WASP-43 0.4 0.002
 
 Two ways
-========
+--------
 
 You can either use TATOO in command line using the TATOO folder.
 
@@ -36,7 +36,7 @@ Or to use a Graphical User Interface (GUI) with the GUI folder.
 This latter will need tkinter that is easily installed using Anaconda.
 
 Installation
-============
+------------
 
 Currently the best way to install *TATOO* is from github.
 
@@ -47,7 +47,7 @@ Currently the best way to install *TATOO* is from github.
     python setup.py install
 
 Dependencies
-============
+------------
 
 The dependencies of *TATOO* are
 `NumPy <http://www.numpy.org/>`_,
@@ -67,8 +67,9 @@ For tkinter (used for the GUI version of *TATOO*) I recommand you to use Anacond
 .. code-block:: bash
 
     conda install tkinter
+
 Data
-====
+----
 
 You'll also need to download the pre-compiled exploration files (Data.tar.gz | 343.9 Mo).
 
@@ -90,7 +91,7 @@ In each of them there are 480 files named Explo_100_sma_prot_sort.dat
 .. id = 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
 
 GUI
-===
+---
 
 .. image:: https://raw.githubusercontent.com/GalletFlorian/TATOO/master/docs/GUI.png
 
