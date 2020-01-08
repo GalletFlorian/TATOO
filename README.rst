@@ -1,7 +1,3 @@
-.. class:: center
-
-This paragraph will be centered.
-
 TATOO
 =====
 Tidal-chronology Age TOOl
