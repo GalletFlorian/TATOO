@@ -22,7 +22,7 @@ Return the age of the system!
 
 Example 
 
-python TATOO.py 0.84 15.6 2.052 0.71 WASP-43 0.4 0.002
+python3.5 TATOO.py 0.84 15.6 2.052 0.71 WASP-43 0.4 0.002
 
 Two ways
 --------
@@ -42,7 +42,7 @@ Currently the best way to install *TATOO* is from github.
     
     git clone https://github.com/GalletFlorian/TATOO.git
     cd TATOO
-    python setup.py install
+    python3.5 setup.py install
 
 Dependencies
 ------------
@@ -92,6 +92,8 @@ It should be extracted in the same folder as the main TATOO folder.
 
 GUI
 ---
+
+pythin3.5 TATOO_GUI.py 
 
 .. image:: https://raw.githubusercontent.com/GalletFlorian/TATOO/master/docs/GUI.png
 
