@@ -102,7 +102,7 @@ python3.5 TATOO_GUI.py
 | Errot_prot: RMS error of the rotation period in days
 | Mp: mass of the planet in Jupiter mass unit
 | Porb: orbital period of the planet in days
-|Error_porb: RMS error of the orbital period in days
+| Error_porb: RMS error of the orbital period in days
 
 | 
 
