@@ -281,21 +281,21 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
                 flag_min = 1
                 arr_agemod_min_rand.append(age_min) #for massstarmin
 	
-                coef_min_f = np.mean(coef_min)
+            coef_min_f = np.mean(coef_min)
 			
-                sma_list=clean(sma_list)
-                prot_list=clean(prot_list)
-                age_list=clean(age_list)
-                massp_list=clean(massp_list)
-                masss_list=clean(masss_list)
+            sma_list=clean(sma_list)
+            prot_list=clean(prot_list)
+            age_list=clean(age_list)
+            massp_list=clean(massp_list)
+            masss_list=clean(masss_list)
 	
 	
-                coef_max[0] = Find_4(floatt3(smaminrand),floatt2(protminrand),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
-                coef_max[1] = Find_4(floatt3(smamaxrand),floatt2(protminrand),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
-                coef_max[2] = Find_4(floatt3(smaminrand),floatt2(protmaxrand),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
-                coef_max[3] = Find_4(floatt3(smamaxrand),floatt2(protmaxrand),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
+            coef_max[0] = Find_4(floatt3(smaminrand),floatt2(protminrand),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
+            coef_max[1] = Find_4(floatt3(smamaxrand),floatt2(protminrand),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
+            coef_max[2] = Find_4(floatt3(smaminrand),floatt2(protmaxrand),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
+            coef_max[3] = Find_4(floatt3(smamaxrand),floatt2(protmaxrand),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
 	
-                age_max = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
+            age_max = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
 	
             if age_max >= 0.0:
                 flag_max = 1
@@ -345,10 +345,10 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
             b = popt[1]
             arr_avgage.append(a*mstarobs + b)
 		
-        age_med_avg = np.median(arr_avgage, 0)  
-        std_age_avg = np.std(arr_avgage)
+        age_med_avg_robust = np.median(arr_avgage, 0)  
+        std_age_avg_robust = np.std(arr_avgage)
 	
-        print ("Robustness: estimated averaged age for {} = {} +- {} Myr.".format(system,age_med_avg,std_age_avg))
+        print ("Robustness: estimated averaged age for the system = {} +- {} Myr.".format(age_med_avg_robust,std_age_avg_robust))
 		
 		
 	##################################################

@@ -10,7 +10,6 @@ import time
 from pathlib import Path
 import webbrowser
 
-
 def is_number(s):
     try:
         float(s)
@@ -40,6 +39,7 @@ def message(msg):
     download_message.configure(text=msg)
     download_message.grid(row=1)
     frame_result.update_idletasks()
+
 
 download_message = Label(frame_result)
 def download():
@@ -132,6 +132,7 @@ e_porb.grid(row=2, column=3, sticky = W)
 
 #frame_result.pack()
 
+
 def saisie():
     print("\nControl on initial parameters")
     print("M_star: %s Msun\nP_rot: %s days\nError_prot: %s days\nMp: %s Mjup\nPorb: %s days\nError_porb: %s days" %(mstar.get(), prot.get(), e_prot.get(),mp.get(), porb.get(), e_porb.get() ))              
@@ -205,7 +206,7 @@ def run():
         else:   
             if (age > 0.0):
                 charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
-                labelage_tidal = Label(frame_result,text=charage).grid(row=0)
+                labelage_tidal = Label(frame_result,text=charage)
                 labelage_tidal.grid(row=0)
                 
                 labelage_gyro.destroy()
@@ -235,4 +236,6 @@ Button(frame2,text='Quit',command=master.quit).grid(row=0,column=5,sticky = W)
 
 master.mainloop()
 
+
 master.destroy()
+
