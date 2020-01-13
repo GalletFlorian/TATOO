@@ -107,7 +107,7 @@ python3.5 TATOO_GUI.py
 | 
 
 | Gyro: when checked, TATOO will give the gyrochronological age of the star
-| Robust: when checked, TATOO wll explore the vicinity of the properties of the requested system
+| Robust: when checked, TATOO will explore the vicinity of the properties of the requested system
 
 |
 
