@@ -98,18 +98,24 @@ python3.5 TATOO_GUI.py
 .. image:: https://raw.githubusercontent.com/GalletFlorian/TATOO/master/docs/GUI.png
 
 M_star: mass of the star in solar mass unit
+
 P_rot: rotation period of the star in days
+
 Errot_prot: RMS error of the rotation period in days
 
 Mp: mass of the planet in Jupiter mass unit
+
 Porb: orbital period of the planet in days
+
 Error_porb: RMS error of the orbital period in days
 
 
 Gyro: when checked, TATOO will give the gyrochronological age of the star
+
 Robust: when checked, TATOO wll explore the vicinity of the properties of the requested system
 
 Coef limit: resquested coefficient for the Pearson linear test
+
 Nb_step: the number of age estimations for the standard deviation of the age
 
 
