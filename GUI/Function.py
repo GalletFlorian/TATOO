@@ -58,7 +58,7 @@ def Is_empty(mstar,sma,prot):
     arr_chi2 = []
     arr_massp = []
     arr_age = []
-    filename = "./%sMsol/Explo_100_%s_%s_sort.dat" %(mstar,floatt3(sma),floatt2(prot))
+    filename = "../Data/%sMsol/Explo_100_%s_%s_sort.dat" %(mstar,floatt3(sma),floatt2(prot))
     flag = 0
     inputfile = open(filename)
     next(inputfile)
@@ -193,7 +193,7 @@ def Find_4(sma,prot,mp,mstar,i,sma_list,prot_list,age_list,massp_list,masss_list
 #of the 4 couples that surround the observed couple.
 #Return the Pearson correlation coefficient of M_p vs. Age of the file "filename"
     
-    filename = "./%sMsol/Explo_100_%s_%s_sort.dat" %(mstar,sma,prot)
+    filename = "../Data/%sMsol/Explo_100_%s_%s_sort.dat" %(mstar,sma,prot)
 
     arr_ai = []
     arr_roti = []

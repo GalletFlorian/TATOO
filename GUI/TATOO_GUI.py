@@ -45,13 +45,17 @@ download_message = Label(frame_result)
 def download():
     global download_message 
     #download_message = Label(frame_result)
-    file = Path("./0.5Msol/")
+    file = Path("../Data/0.5Msol/")
     if file.exists():
         download_message = Label(frame_result,text="Directory already exists.")
         download_message.grid(row=1)
         frame_result.update_idletasks()
     else:    
         message("Downloading file, please wait.")
+        mkdir = "mkdir ../Data/"
+        os.system(mkdir)
+        os.chdir("../Data/")    
+        os.system("pwd")
         dl = "gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO"
         os.system(dl)
         message("Data.tar.gz downloaded.Extraction of file.")
@@ -59,6 +63,7 @@ def download():
         os.system(extract)
         remove = "rm Data.tar.gz"
         os.system(remove) 
+        os.chdir("../GUI/") 
         message("Extraction done.")
         time.sleep(0.4)
         download_message.destroy()
@@ -146,7 +151,7 @@ def run():
     
     #run TATOO here => return age of system
     #Then display age of system
-    file = Path("./0.5Msol/")
+    file = Path("../Data/0.5Msol/")
     if file.exists():
         G = 6.6742367e-11
         Mjup = 1.8986112e27    
