@@ -113,7 +113,7 @@ python3.5 TATOO_GUI.py
 
 |
 
-| Coef limit: resquested coefficient for the Pearson linear test
+| Coef limit: resquested coefficient for the Pearson correlation coefficient test
 | Nb_step: the number of age estimations for the standard deviation of the age
 
 
