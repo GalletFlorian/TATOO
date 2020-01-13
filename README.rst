@@ -3,7 +3,7 @@
 
 This tool is specifically developed for massive close-in planetary systems: M\ :sub:`p`\  > 0.5 M\ :sub:`jup`\  and 0.5 < M\ :sub:`star`\/M\ :sub:`sun`\  < 1.0
 
-*TATOO* currently only works with python3.
+*TATOO* currently only works with python3.5
 
 Input parameter: 
 
