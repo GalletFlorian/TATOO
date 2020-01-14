@@ -78,7 +78,11 @@ To download the file from Google Drive via command line, an easy way is to use g
 .. code-block:: bash
     
     pip install gdown
+    cd ./Data/
     gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
+    tar zxvf Data.tar.gz
+    rm Data.tar.gz
+    cd ../
 
 This file contain six folders (0.5Msol | 0.6Msol | 0.7Msol | 0.8Msol | 0.9Msol | 1.0Msol). 
 
