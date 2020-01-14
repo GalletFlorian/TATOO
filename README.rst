@@ -99,6 +99,16 @@ python3.5 TATOO_GUI.py
 
 .. image:: https://raw.githubusercontent.com/GalletFlorian/TATOO/master/docs/GUI.png
 
+
++------------+------------+
+|  M_star: mass of the star in solar mass unit | Mp: mass of the planet in Jupiter mass unit  | 
++------------+------------+
+| P_rot: rotation period of the star in days | Porb: orbital period of the planet in days |
++------------+------------+
+| Errot_prot: RMS error of the rotation period in days | Error_porb: RMS error of the orbital period in days | 
++------------+------------+
+
+
 | M_star: mass of the star in solar mass unit
 | P_rot: rotation period of the star in days
 | Errot_prot: RMS error of the rotation period in days
