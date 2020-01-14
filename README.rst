@@ -18,7 +18,7 @@ Optional:
 6) Error_Prot in days
 7) Error_Porb in days
 
-Return the age of the system!
+Return the age of the system in Myr.
 
 Example: 
 
