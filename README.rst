@@ -102,22 +102,12 @@ python3.5 TATOO_GUI.py
 +------------------------------------------------------+-----------------------------------------------------+
 |                          Star                        | Planet                                              | 
 +======================================================+=====================================================+
-| M_star: mass of the star in solar mass unit          | Mp: mass of the planet in Jupiter mass unit         | 
+| M_star: Mass of the star in solar mass unit          | Mp: mass of the planet in Jupiter mass unit         | 
 +------------------------------------------------------+-----------------------------------------------------+
 | P_rot: rotation period of the star in days           | Porb: orbital period of the planet in days          |
 +------------------------------------------------------+-----------------------------------------------------+
 | Errot_prot: RMS error of the rotation period in days | Error_porb: RMS error of the orbital period in days | 
 +------------------------------------------------------+-----------------------------------------------------+
-
-
-| M_star: mass of the star in solar mass unit
-| P_rot: rotation period of the star in days
-| Errot_prot: RMS error of the rotation period in days
-| Mp: mass of the planet in Jupiter mass unit
-| Porb: orbital period of the planet in days
-| Error_porb: RMS error of the orbital period in days
-
-| 
 
 | Gyro: when checked, TATOO will give the gyrochronological age of the star
 | Robust: when checked, TATOO will explore the vicinity of the properties of the requested system
