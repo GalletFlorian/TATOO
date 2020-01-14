@@ -90,7 +90,7 @@ In each of them there are 480 files named Explo_100_sma_prot_sort.dat
 
 .. id = 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
 
-It should be extracted in the same folder as the main TATOO folder.
+It should be extracted in the Data folder.
 
 GUI
 ---
