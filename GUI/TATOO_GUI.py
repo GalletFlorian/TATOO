@@ -70,7 +70,7 @@ def download():
         
 def help_tatoo():
     print("© Florian Gallet 2019")
-    print("Gallet 2020,A&A")
+    print("Gallet 2020, A&A")
     webbrowser.open_new(r"https://github.com/GalletFlorian/TATOO/blob/master/README.rst")
 
 menubar = Menu(master)
@@ -88,9 +88,9 @@ menubar.add_cascade(label="File", menu=menu1)
 #menu2.add_command(label="Tbc", command=alert)
 #menubar.add_cascade(label="Edit", menu=menu2)
 
-#menu3 = Menu(menubar, tearoff=0)
-#menu3.add_command(label="About", command=help_tatoo)
-#menubar.add_cascade(label="Help", menu=menu3)
+menu3 = Menu(menubar, tearoff=0)
+menu3.add_command(label="About", command=help_tatoo)
+menubar.add_cascade(label="Help", menu=menu3)
 
 master.config(menu=menubar)
 
