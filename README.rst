@@ -106,9 +106,9 @@ python3.5 TATOO_GUI.py
 +------------------------------------------------------+-----------------------------------------------------+
 |                          Star                        | Planet                                              | 
 +======================================================+=====================================================+
-| Mstar: Mass of the star in solar mass unit          | Mp: Mass of the planet in Jupiter mass unit         | 
+| Mstar: Mass of the star in solar mass unit           | Mp: Mass of the planet in Jupiter mass unit         | 
 +------------------------------------------------------+-----------------------------------------------------+
-| Prot: Rotation period of the star in days           | Porb: Orbital period of the planet in days          |
+| Prot: Rotation period of the star in days            | Porb: Orbital period of the planet in days          |
 +------------------------------------------------------+-----------------------------------------------------+
 | Errot_prot: RMS error of the rotation period in days | Error_porb: RMS error of the orbital period in days | 
 +------------------------------------------------------+-----------------------------------------------------+
