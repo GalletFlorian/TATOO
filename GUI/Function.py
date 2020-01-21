@@ -104,7 +104,10 @@ def Control_file(frame_result,protin,smain,iprot,isma,mstar,smamin,protmin,smama
         else:
             if index_ref_sma+1+index >= size_sma:
                 print("No non empty pre-compiled file found. Stop")
-                Label(frame_result,text="No non empty pre-compiled file found. Stop").grid(row=0)
+                
+                charerror = "No non empty pre-compiled file found. Stop"                
+                label_error = Label(frame_result,text=charerror)
+                label_error.grid(row=0)
                 frame_result.update_idletasks()
                 return 0,0,0,0,1
                 

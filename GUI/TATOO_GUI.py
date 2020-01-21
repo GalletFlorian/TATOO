@@ -94,8 +94,19 @@ menubar.add_cascade(label="Help", menu=menu3)
 
 master.config(menu=menubar)
 
-Label(frame1,text="M_star =",width = 10,anchor='e').grid(row=0,column = 0, sticky = E)
-Label(frame1,text="P_rot =",width = 10,anchor='e').grid(row=1,column = 0, sticky = E)
+
+test = Text(width=5, height=2, borderwidth=0)
+#test = "M"
+test.tag_configure("subscript", offset=-4)
+test.insert("insert", "M", "", "star", "subscript", " =")
+test.configure(state="disabled")
+#test.pack()
+
+
+
+
+Label(frame1,text="Mstar",width = 10,anchor='e').grid(row=0,column = 0, sticky = E)
+Label(frame1,text="Prot =",width = 10,anchor='e').grid(row=1,column = 0, sticky = E)
 Label(frame1,text="Error_prot =",width = 10,anchor='e').grid(row=2,column = 0, sticky = E)
 Label(frame1,text="Mp =",width = 10,anchor='e').grid(row=0,column = 2, sticky = E)
 Label(frame1,text="Porb =",width = 10,anchor='e').grid(row=1,column = 2, sticky = E)
@@ -191,6 +202,10 @@ def run():
         global labelage_tidal
         if (_gyro_var == 1):
             if (age > 0.0):
+            	if (labelage_tidal.winfo_exists() == 1):
+                	labelage_tidal.destroy()
+                if (label_error.winfo_exists() == 1):
+                	label_error.destroy()
                 charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
                 charage_gyro = "Age_gyro = "+str(round(age_gyro,2))+" Myr"
                 labelage_tidal = Label(frame_result,text=charage)
@@ -205,6 +220,12 @@ def run():
                 frame_result.update_idletasks()
         else:   
             if (age > 0.0):
+            	if (labelage_tidal.winfo_exists() == 1):
+                	labelage_tidal.destroy()
+                if (label_error.winfo_exists() == 1):
+                	label_error.destroy()
+        
+                labelage_tidal.destroy()
                 charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
                 labelage_tidal = Label(frame_result,text=charage)
                 labelage_tidal.grid(row=0)

@@ -1,1 +1,6 @@
+pip install gdown
+cd ./Data/
 gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
+tar zxvf Data.tar.gz
+rm Data.tar.gz
+cd ../
