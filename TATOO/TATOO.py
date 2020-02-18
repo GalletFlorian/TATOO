@@ -373,7 +373,6 @@ if robust == 1:
 
 if gyro == 1:	
 	
-	
 	#Based on the calibration from Angus et al. 2015
 	BV_ = np.array([1.6033,1.5906,1.5640,1.5176,1.4476,1.2513,1.0070,0.8289,0.6900,0.5906,0.5077,0.4418,0.3368,0.2474])
 	flag_gyro = 0   
