@@ -71,6 +71,7 @@ pi = 3.14159265359
 
 smaobs =  ( (porbobs * 24.*3600. / (2*pi))**2.0 * G * (mstarobs*Msun+mp*Mjup))**(1./3.) / 1.49598e11
 
+
 if (args.system == None):
 	system = "Unknown_system"
 else:	
@@ -103,15 +104,15 @@ Nbtest_limit = 100
 robust = 0
 
 #If you want to display the gyrochronological age based on the calibration of Delorme et al. (2011) MNRAS, 413, 2218
-gyro = 0
+gyro = 1
 
 
 #The minimum value of the spearmanr coefficient.
-coeflim = 0.7
+coeflim = 0.8
 
 
 #Number of try before crash
-Nbtest_step_try = 3
+Nbtest_step_try = 5
 
 arr_agemod_min = []
 arr_agemod_max = []
@@ -384,7 +385,7 @@ if gyro == 1:
 	
 	age_gyro =( float(protobs) / (0.4*(BV-0.45)**0.31) )**(1.0/0.55)
 	
-
 	print ("Age gyro = {}.".format(age_gyro))
+
 
 	
