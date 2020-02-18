@@ -71,6 +71,7 @@ pi = 3.14159265359
 
 smaobs =  ( (porbobs * 24.*3600. / (2*pi))**2.0 * G * (mstarobs*Msun+mp*Mjup))**(1./3.) / 1.49598e11
 
+
 if (args.system == None):
 	system = "Unknown_system"
 else:	
@@ -103,15 +104,15 @@ Nbtest_limit = 100
 robust = 0
 
 #If you want to display the gyrochronological age based on the calibration of Delorme et al. (2011) MNRAS, 413, 2218
-gyro = 0
+gyro = 1
 
 
 #The minimum value of the spearmanr coefficient.
-coeflim = 0.7
+coeflim = 0.8
 
 
 #Number of try before crash
-Nbtest_step_try = 3
+Nbtest_step_try = 5
 
 arr_agemod_min = []
 arr_agemod_max = []
@@ -372,27 +373,20 @@ if robust == 1:
 
 if gyro == 1:	
 	
-	#Based on the calibration from Delorme et al. (2011) MNRAS, 413, 2218
-	JK_ = np.array([0.8654,0.8529,0.8419,0.8268,0.8023,0.7439,0.5936,0.4751,0.3670,0.3116,0.2622,0.2119,0.1673,0.1392])
+	
+	#Based on the calibration from Angus et al. 2015
+	BV_ = np.array([1.6033,1.5906,1.5640,1.5176,1.4476,1.2513,1.0070,0.8289,0.6900,0.5906,0.5077,0.4418,0.3368,0.2474])
 	flag_gyro = 0   
-	for i in range(0,len(JK_)): 
+	for i in range(0,len(BV_)): 
 		if float(mstarobs) <= 0.1*(i+2) and flag_gyro==0:
-			a = (JK_[i]-JK_[i-1])/(0.1*(i+2) - (0.1*(i+1)))
-			b = JK_[i]-a*0.1*(i+2)
-			JK = a*mstarobs+b
+			a = (BV_[i]-BV_[i-1])/(0.1*(i+2) - (0.1*(i+1)))
+			b = BV_[i]-a*0.1*(i+2)
+			BV = a*mstarobs+b
 			flag_gyro = 1
-		
-	pow=1./0.56
-
-	avper=10.603
-	avcol=0.570
-	dxdy=12.314
-	age_clus=625.0
-
-	disp=0.45
-	per_c=avper+dxdy*(JK-avcol)
-	age_gyro=age_clus*(float(protobs)/per_c)**pow
-
+	
+	age_gyro =( float(protobs) / (0.4*(BV-0.45)**0.31) )**(1.0/0.55)
+	
 	print ("Age gyro = {}.".format(age_gyro))
+
 
 	
