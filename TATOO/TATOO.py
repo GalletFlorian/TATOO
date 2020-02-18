@@ -385,6 +385,28 @@ if gyro == 1:
 	
 	age_gyro =( float(protobs) / (0.4*(BV-0.45)**0.31) )**(1.0/0.55)
 	
+	#Based on the calibration from Delorme et al. (2011) MNRAS, 413, 2218
+	#JK_ = np.array([0.8654,0.8529,0.8419,0.8268,0.8023,0.7439,0.5936,0.4751,0.3670,0.3116,0.2622,0.2119,0.1673,0.1392])
+	
+	#flag_gyro = 0   
+	#for i in range(0,len(JK_)): 
+	#	if float(mstarobs) <= 0.1*(i+2) and flag_gyro==0:
+	#		a = (JK_[i]-JK_[i-1])/(0.1*(i+2) - (0.1*(i+1)))
+	#		b = JK_[i]-a*0.1*(i+2)
+	#		JK = a*mstarobs+b
+	#		flag_gyro = 1
+		
+	#pow=1./0.56
+
+	#avper=10.603
+	#avcol=0.570
+	#dxdy=12.314
+	#age_clus=625.0
+
+	#disp=0.45
+	#per_c=avper+dxdy*(JK-avcol)
+	#age_gyro=age_clus*(float(protobs)/per_c)**pow
+	
 	print ("Age gyro = {}.".format(age_gyro))
 
 
