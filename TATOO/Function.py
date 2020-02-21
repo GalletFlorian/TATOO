@@ -1,10 +1,5 @@
 import numpy as np
 from scipy.interpolate import griddata
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import random
-import math
-import sys
 from scipy import stats
 from scipy.optimize import curve_fit
 
@@ -208,7 +203,6 @@ def Find_4(sma,prot,mp,mstar,i,sma_list,prot_list,age_list,massp_list,masss_list
 	
 	count = 0
 	
-	count_all = []
 	inputfile = open(filename)
 	next(inputfile)
 	for line in inputfile:
@@ -240,7 +234,6 @@ def Find_4(sma,prot,mp,mstar,i,sma_list,prot_list,age_list,massp_list,masss_list
 
 			arr_mean_age_coef.append(np.average(np.array(arr_age_all[k]), axis=None, weights=np.array(arr_weight_all[k])))
 			arr_massp_coef.append(arr_massp_all[k][0])
-			mean_age_tmp = np.average(np.array(arr_age_all[k]), axis=None, weights=np.array(arr_weight_all[k]))
 			count_mp = count_mp + 1
 			
 	if count > 0 and count_mp > 1:
@@ -263,7 +256,6 @@ def Find_4(sma,prot,mp,mstar,i,sma_list,prot_list,age_list,massp_list,masss_list
 		masss_list[i] = float(mstar)
 		popt = [0.0, 0.0]
 		
-	coef_spear = stats.spearmanr(np.array(arr_mean_age_coef),func_lin(np.array(arr_massp_coef),*popt))[0]	
 	coef_pear  = stats.pearsonr(np.array(arr_mean_age_coef),func_lin(np.array(arr_massp_coef),*popt))[0]	
 	
 	coef = coef_pear

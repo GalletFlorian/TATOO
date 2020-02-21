@@ -1,16 +1,9 @@
 import numpy as np
-from scipy.interpolate import griddata
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 import random
 import sys
-from scipy.optimize import curve_fit
 from Function import Find_4
-from Function import func_sq 
-from Function import func_lin
 from Function import clean
 from Function import Control_file
-from Function import Is_empty
 from Function import Find_age
 import argparse
 
