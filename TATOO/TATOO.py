@@ -96,7 +96,7 @@ Nbtest_limit = 100
 #corner points. 
 robust = 0
 
-#If you want to display the gyrochronological age based on the calibration of Delorme et al. (2011) MNRAS, 413, 2218
+#If you want to display the gyrochronological age based on the calibration of Angus et al. (2019), AJ, 158, 173
 gyro = 1
 
 
@@ -401,6 +401,3 @@ if gyro == 1:
 	#age_gyro=age_clus*(float(protobs)/per_c)**pow
 	
 	print ("Age gyro = {}.".format(age_gyro))
-
-
-	
