@@ -1,13 +1,21 @@
-Dowload the pre-compiled exploration files here (Data.tar.gz | 343.9 Mo).
+You'll also need to download the pre-compiled exploration files (Data.tar.gz | 343.9 Mo).
 
-https://share.orange.fr/#yBC3ycDIV23f0e138a24
+To download the file from Google Drive via command line, an easy way is to use gdown (https://github.com/circulosmeos/gdown.pl). 
 
+You can install it via pip:
 
-Its in French: first clic on the file, then on the "Télécharger" button.
+pip install gdown
+cd ./Data/
+gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
+tar zxvf Data.tar.gz
+rm Data.tar.gz
+cd ../
 
-This file contain six folders (0.5Msol | 0.6Msol | 0.7Msol | 0.8Msol | 0.9Msol | 1.0Msol). 
+This file contain six folders (0.5Msol | 0.6Msol | 0.7Msol | 0.8Msol | 0.9Msol | 1.0Msol).
 
 In each of them there are 480 files named Explo_100_sma_prot_sort.dat
+
+It should be extracted in the Data folder.
 
 
 Requested packages
