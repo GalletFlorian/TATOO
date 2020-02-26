@@ -11,11 +11,11 @@ from pathlib import Path
 import webbrowser
 
 def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        return False
+	try:
+		float(s)
+		return True
+	except ValueError:
+		return False
 
 
 master = Tk()
@@ -32,46 +32,46 @@ frame_result = Frame(master, bd=1)
 frame_result.grid(row = 5, column = 1, columnspan = 4)
 
 def alert():
-    print("Ok")
-    
+	print("Ok")
+	
 
 def message(msg):
-    download_message.configure(text=msg)
-    download_message.grid(row=1)
-    frame_result.update_idletasks()
+	download_message.configure(text=msg)
+	download_message.grid(row=1)
+	frame_result.update_idletasks()
 
 
 download_message = Label(frame_result)
 def download():
-    global download_message 
-    #download_message = Label(frame_result)
-    file = Path("../Data/0.5Msol/")
-    if file.exists():
-        download_message = Label(frame_result,text="Directory already exists.")
-        download_message.grid(row=1)
-        frame_result.update_idletasks()
-    else:    
-        message("Downloading file, please wait.")
-        mkdir = "mkdir ../Data/"
-        os.system(mkdir)
-        os.chdir("../Data/")    
-        os.system("pwd")
-        dl = "gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO"
-        os.system(dl)
-        message("Data.tar.gz downloaded.Extraction of file.")
-        extract = "tar zxvf Data.tar.gz"
-        os.system(extract)
-        remove = "rm Data.tar.gz"
-        os.system(remove) 
-        os.chdir("../GUI/") 
-        message("Extraction done.")
-        time.sleep(0.4)
-        download_message.destroy()
-        
+	global download_message 
+	#download_message = Label(frame_result)
+	file = Path("../Data/0.5Msol/")
+	if file.exists():
+		download_message = Label(frame_result,text="Directory already exists.")
+		download_message.grid(row=1)
+		frame_result.update_idletasks()
+	else:	
+		message("Downloading file, please wait.")
+		mkdir = "mkdir ../Data/"
+		os.system(mkdir)
+		os.chdir("../Data/")	
+		os.system("pwd")
+		dl = "gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO"
+		os.system(dl)
+		message("Data.tar.gz downloaded.Extraction of file.")
+		extract = "tar zxvf Data.tar.gz"
+		os.system(extract)
+		remove = "rm Data.tar.gz"
+		os.system(remove) 
+		os.chdir("../GUI/") 
+		message("Extraction done.")
+		time.sleep(0.4)
+		download_message.destroy()
+		
 def help_tatoo():
-    print("© Florian Gallet 2019")
-    print("Gallet 2020, A&A")
-    webbrowser.open_new(r"https://github.com/GalletFlorian/TATOO/blob/master/README.rst")
+	print("© Florian Gallet 2019")
+	print("Gallet 2020, A&A")
+	webbrowser.open_new(r"https://github.com/GalletFlorian/TATOO/blob/master/README.rst")
 
 menubar = Menu(master)
 
@@ -145,96 +145,102 @@ e_porb.grid(row=2, column=3, sticky = W)
 
 
 def saisie():
-    print("\nControl on initial parameters")
-    print("M_star: %s Msun\nP_rot: %s days\nError_prot: %s days\nMp: %s Mjup\nPorb: %s days\nError_porb: %s days" %(mstar.get(), prot.get(), e_prot.get(),mp.get(), porb.get(), e_porb.get() ))              
-    global coeflim 
-    coeflim_var = coeflim.get()
-    if is_number(coeflim_var) == False :
-        coeflim_var = 0.7
-    else:
-        coeflim_var = float(coeflim_var)
-        
-    print("Coef. lim=",coeflim_var)
-    
-    print("Gyro =",gyro_var.get())
-    print("Robust =",robust_var.get())
+	print("\nControl on initial parameters")
+	print("M_star: %s Msun\nP_rot: %s days\nError_prot: %s days\nMp: %s Mjup\nPorb: %s days\nError_porb: %s days" %(mstar.get(), prot.get(), e_prot.get(),mp.get(), porb.get(), e_porb.get() ))			  
+	global coeflim 
+	coeflim_var = coeflim.get()
+	if is_number(coeflim_var) == False :
+		coeflim_var = 0.7
+	else:
+		coeflim_var = float(coeflim_var)
+		
+	print("Coef. lim=",coeflim_var)
+	
+	print("Gyro =",gyro_var.get())
+	print("Robust =",robust_var.get())
 
 def run():
-    
-    #run TATOO here => return age of system
-    #Then display age of system
-    file = Path("../Data/0.5Msol/")
-    if file.exists():
-        G = 6.6742367e-11
-        Mjup = 1.8986112e27    
-        Msun = 1.98892e30
-        pi = 3.14159265359
-    
-        age, e_age, age_gyro = 0.0, 0.0, 0.0
-    
-        global coeflim 
-        coeflim_var = coeflim.get()
-        if is_number(coeflim_var) == False :
-            coeflim_var = 0.7
-        else:
-            coeflim_var = float(coeflim_var)
-        
-        global nbstep 
-        nbstep_var = nbstep.get()
-        if is_number(nbstep_var) == False :
-            nbstep_var = 10
-        else:
-            nbstep_var = float(nbstep_var)
-                 
-        _gyro_var = gyro_var.get()
-        _robust_var = robust_var.get()
-    
-        _mstar = float(mstar.get())
-        _prot = float(prot.get())
-        _e_prot = float(e_prot.get())
-        _mp = float(mp.get())
-        _porb = float(porb.get())
-        _sma =  ( (_porb * 24.*3600. / (2*pi))**2.0 * G * (_mstar*Msun+_mp*Mjup))**(1./3.) / 1.49598e11
-        _e_porb = float(e_porb.get())
-        _e_sma =  ( (_e_porb * 24.*3600. / (2*pi))**2.0 * G * (_mstar*Msun+_mp*Mjup))**(1./3.) / 1.49598e11
-        age, e_age, age_gyro = TATOO(frame_result,_mstar,_prot,_e_prot,_mp,_sma,_e_sma, " ", _gyro_var, _robust_var, coeflim_var,nbstep_var)    
-        global labelage_gyro
-        global labelage_tidal
-        if (_gyro_var == 1):
-            if (age > 0.0):
-            	if (labelage_tidal.winfo_exists() == 1):
-                	labelage_tidal.destroy()
-                if (label_error.winfo_exists() == 1):
-                	label_error.destroy()
-                charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
-                charage_gyro = "Age_gyro = "+str(round(age_gyro,2))+" Myr"
-                labelage_tidal = Label(frame_result,text=charage)
-                labelage_tidal.grid(row=0)
-                
-                labelage_gyro = Label(frame_result,text=charage_gyro)
-                labelage_gyro.grid(row=1)
-            else:
-                labelage_tidal.destroy()
-                labelage_gyro.destroy()
-                download_message.destroy()
-                frame_result.update_idletasks()
-        else:   
-            if (age > 0.0):
-            	if (labelage_tidal.winfo_exists() == 1):
-                	labelage_tidal.destroy()
-                if (label_error.winfo_exists() == 1):
-                	label_error.destroy()
-        
-                labelage_tidal.destroy()
-                charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
-                labelage_tidal = Label(frame_result,text=charage)
-                labelage_tidal.grid(row=0)
-                
-                labelage_gyro.destroy()
-                download_message.destroy()
+	saisie()
+	#run TATOO here => return age of system
+	#Then display age of system
+	file = Path("../Data/0.5Msol/")
+	if file.exists():
+		G = 6.6742367e-11
+		Mjup = 1.8986112e27	
+		Msun = 1.98892e30
+		pi = 3.14159265359
+	
+		age, e_age, age_gyro, e_age_gyro = 0.0, 0.0, 0.0, 0.0
+	
+		global coeflim 
+		coeflim_var = coeflim.get()
+		if is_number(coeflim_var) == False :
+			coeflim_var = 0.7
+		else:
+			coeflim_var = float(coeflim_var)
+		
+		global nbstep 
+		nbstep_var = nbstep.get()
+		if is_number(nbstep_var) == False :
+			nbstep_var = 10
+		else:
+			nbstep_var = float(nbstep_var)
+				 
+		_gyro_var = gyro_var.get()
+		_robust_var = robust_var.get()
+	
+		_mstar = float(mstar.get())
+		_prot = float(prot.get())
+		_e_prot = float(e_prot.get())
+		_mp = float(mp.get())
+		_porb = float(porb.get())
+		_sma =  ( (_porb * 24.*3600. / (2*pi))**2.0 * G * (_mstar*Msun+_mp*Mjup))**(1./3.) / 1.49598e11
+		_e_porb = float(e_porb.get())
+		_e_sma =  ( (_e_porb * 24.*3600. / (2*pi))**2.0 * G * (_mstar*Msun+_mp*Mjup))**(1./3.) / 1.49598e11
+		age, e_age, age_gyro, e_age_gyro = TATOO(frame_result,_mstar,_prot,_e_prot,_mp,_sma,_e_sma, " ", _gyro_var, _robust_var, coeflim_var,nbstep_var)	
+		
+		global labelage_gyro
+		global labelage_tidal
+		labelage_tidal = Label(frame_result,text=' ')
+		label_error =  Label(frame_result,text=' ')
+		
+		if (_gyro_var == 1):
+			if (age > 0.0):
+				if (labelage_tidal.winfo_exists() == 1):
+					labelage_tidal.destroy()
+				if (label_error.winfo_exists() == 1):
+					label_error.destroy()
+				charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
+				charage_gyro = "Age_gyro = "+str(round(age_gyro,2))+" +- "+str(round(e_age_gyro,2))+" Myr"
+				labelage_tidal = Label(frame_result,text=charage)
+				labelage_tidal.grid(row=0)
+				
+				labelage_gyro = Label(frame_result,text=charage_gyro)
+				labelage_gyro.grid(row=1)
+			else:
+				labelage_tidal.destroy()
+				labelage_gyro.destroy()
+				download_message.destroy()
+				frame_result.update_idletasks()
+		else:
+			labelage_gyro.destroy()
+			download_message.destroy() 
+			if (age > 0.0):
+				if (labelage_tidal.winfo_exists() == 1):
+					labelage_tidal.destroy()
+				if (label_error.winfo_exists() == 1):
+					label_error.destroy()
+		
+				labelage_tidal.destroy()
+				charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
+				labelage_tidal = Label(frame_result,text=charage)
+				labelage_tidal.grid(row=0)
+				
 
-    else:
-        message("Download data first")
+
+
+	else:
+		message("Download data first")
  
 
 gyro_var = IntVar(value=1)

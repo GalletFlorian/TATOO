@@ -261,9 +261,17 @@ def Find_4(sma,prot,mp,mstar,i,sma_list,prot_list,age_list,massp_list,masss_list
             
     if count > 0 and count_mp > 1:
         
-        popt, pcov = curve_fit(func_lin, np.array(arr_massp_coef), np.array(arr_mean_age_coef))
-        a = popt[0]
-        b = popt[1]
+        popt = [0.0,0.0]
+        if (len(np.array(arr_massp_coef))>2):
+            popt, pcov = curve_fit(func_lin, np.array(arr_massp_coef), np.array(arr_mean_age_coef))
+            a = popt[0]
+            b = popt[1]	
+        else:	
+            a = (float(arr_mean_age_coef[1])- float(arr_mean_age_coef[0]))/ (  float(arr_massp_coef[1])- float(arr_massp_coef[0])) 
+            b = float(arr_mean_age_coef[1])-a* float(arr_massp_coef[1])
+            popt[0]	= a
+            popt[1] = b
+			
         time_mod = a*float(mp)+b
                     
         sma_list[i] = float(sma)

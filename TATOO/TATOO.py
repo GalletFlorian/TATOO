@@ -101,7 +101,7 @@ gyro = 1
 
 
 #The minimum value of the spearmanr coefficient.
-coeflim = 0.8
+coeflim = 0.2
 
 
 #Number of try before crash
@@ -145,7 +145,6 @@ while Nb < nstep:
 	masss_list = [0.0,0.0,0.0,0.0] 	
 	coef_min = [0.0,0.0,0.0,0.0] 	
 	coef_max = [0.0,0.0,0.0,0.0] 	
-	
 	
 	#random exploration on P_rot and SMA given Error_Prot and Error_SMA
 	protrand = random.uniform(protobs-sigmarot,protobs+sigmarot)
@@ -199,12 +198,11 @@ while Nb < nstep:
 	masss_list=clean(masss_list)
 	
 	smamin,protmin,smamax,protmax= Control_file(prot,sma,index_ref_prot,index_ref_sma,massstarmax,smamin,protmin,smamax,protmax)
-
 	coef_max[0] = Find_4(floatt3(smamin),floatt2(protmin),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
 	coef_max[1] = Find_4(floatt3(smamax),floatt2(protmin),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
 	coef_max[2] = Find_4(floatt3(smamin),floatt2(protmax),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
 	coef_max[3] = Find_4(floatt3(smamax),floatt2(protmax),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
-
+	
 	age_max = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
 	
 	
@@ -218,7 +216,7 @@ while Nb < nstep:
 	#mass of the planet?
 	Nbtest = Nbtest + 1
 	if (abs(coef_min_f) > coeflim and abs(coef_max_f) > coeflim) and flag_max*flag_min == 1:
-		print (Nb,arr_agemod_min[Nb],arr_agemod_max[Nb],coef_min_f,coef_max_f)
+		#print (Nb,arr_agemod_min[Nb],arr_agemod_max[Nb],coef_min_f,coef_max_f)
 		Nb = Nb + 1
 		Nbtest = 0
 
@@ -366,38 +364,46 @@ if robust == 1:
 
 if gyro == 1:	
 	
-	#Based on the calibration from Angus et al. 2015
-	BV_ = np.array([1.6033,1.5906,1.5640,1.5176,1.4476,1.2513,1.0070,0.8289,0.6900,0.5906,0.5077,0.4418,0.3368,0.2474])
-	flag_gyro = 0   
-	for i in range(0,len(BV_)): 
-		if float(mstarobs) <= 0.1*(i+2) and flag_gyro==0:
-			a = (BV_[i]-BV_[i-1])/(0.1*(i+2) - (0.1*(i+1)))
-			b = BV_[i]-a*0.1*(i+2)
-			BV = a*mstarobs+b
-			flag_gyro = 1
-	
-	age_gyro =( float(protobs) / (0.4*(BV-0.45)**0.31) )**(1.0/0.55)
-	
-	#Based on the calibration from Delorme et al. (2011) MNRAS, 413, 2218
-	#JK_ = np.array([0.8654,0.8529,0.8419,0.8268,0.8023,0.7439,0.5936,0.4751,0.3670,0.3116,0.2622,0.2119,0.1673,0.1392])
-	
-	#flag_gyro = 0   
-	#for i in range(0,len(JK_)): 
-	#	if float(mstarobs) <= 0.1*(i+2) and flag_gyro==0:
-	#		a = (JK_[i]-JK_[i-1])/(0.1*(i+2) - (0.1*(i+1)))
-	#		b = JK_[i]-a*0.1*(i+2)
-	#		JK = a*mstarobs+b
-	#		flag_gyro = 1
+	arr_age_gyro = []
+	for nb_gyro in range(0,nstep):
 		
-	#pow=1./0.56
-
-	#avper=10.603
-	#avcol=0.570
-	#dxdy=12.314
-	#age_clus=625.0
-
-	#disp=0.45
-	#per_c=avper+dxdy*(JK-avcol)
-	#age_gyro=age_clus*(float(protobs)/per_c)**pow
+		protrand = random.uniform(protobs-sigmarot,protobs+sigmarot)
+		#Based on the calibration from Angus et al. 2015
+		BV_ = np.array([1.6033,1.5906,1.5640,1.5176,1.4476,1.2513,1.0070,0.8289,0.6900,0.5906,0.5077,0.4418,0.3368,0.2474])
+		flag_gyro = 0   
+		for i in range(0,len(BV_)): 
+			if float(mstarobs) <= 0.1*(i+2) and flag_gyro==0:
+				a = (BV_[i]-BV_[i-1])/(0.1*(i+2) - (0.1*(i+1)))
+				b = BV_[i]-a*0.1*(i+2)
+				BV = a*mstarobs+b
+				flag_gyro = 1
 	
-	print ("Age gyro = {}.".format(age_gyro))
+		age_gyro =(float(protrand) / (0.4*(BV-0.45)**0.31) )**(1.0/0.55)
+		arr_age_gyro.append(age_gyro)
+	
+		#Based on the calibration from Delorme et al. (2011) MNRAS, 413, 2218
+		#JK_ = np.array([0.8654,0.8529,0.8419,0.8268,0.8023,0.7439,0.5936,0.4751,0.3670,0.3116,0.2622,0.2119,0.1673,0.1392])
+	
+		#flag_gyro = 0   
+		#for i in range(0,len(JK_)): 
+		#	if float(mstarobs) <= 0.1*(i+2) and flag_gyro==0:
+		#		a = (JK_[i]-JK_[i-1])/(0.1*(i+2) - (0.1*(i+1)))
+		#		b = JK_[i]-a*0.1*(i+2)
+		#		JK = a*mstarobs+b
+		#		flag_gyro = 1
+		
+		#pow=1./0.56
+
+		#avper=10.603
+		#avcol=0.570
+		#dxdy=12.314
+		#age_clus=625.0
+
+		#disp=0.45
+		#per_c=avper+dxdy*(JK-avcol)
+		#age_gyro=age_clus*(float(protobs)/per_c)**pow
+	
+	age_gyro_med_avg = np.median(arr_age_gyro, 0)
+	std_age_gyro_avg = np.std(arr_age_gyro)
+	
+	print ("Age gyro for {} = {} +- {} Myr.".format(system,age_gyro_med_avg,std_age_gyro_avg))
