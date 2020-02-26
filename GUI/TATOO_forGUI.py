@@ -43,22 +43,22 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
 	# 7) Error_SMA in au
 
 	if (system == None):
-								system = "Unknown_system"
+		system = "Unknown_system"
 	else:	
-								system = system
+		system = system
 	
 	
 	if (e_prot == 0.0):
-								print("Standard Error_Prot = 0.4 days")
-								sigmarot = 0.4	
+		print("Standard Error_Prot = 0.4 days")
+		sigmarot = 0.4	
 	else:
-								sigmarot = e_prot
+		sigmarot = e_prot
 	
 	if (e_porb == 0.0):
-								print("Standard Error_Prob = 1e-3 days")
-								sigmasma = 0.002	
+		print("Standard Error_Prob = 1e-3 days")
+		sigmasma = 0.002	
 	else:
-								sigmasma = e_porb		
+		sigmasma = e_porb		
 	
 	
 	#Number of age estimations for a given system. 
@@ -89,9 +89,9 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
 	
 	#Find the two stellar mass around the mass of the required star
 	for index_mass in range(0,size_mass-1):
-								if mstarobs >= massstar[index_mass]:
-										  massstarmin = massstar[index_mass]
-										  massstarmax = massstar[index_mass+1]
+		if mstarobs >= massstar[index_mass]:
+			massstarmin = massstar[index_mass]
+			massstarmax = massstar[index_mass+1]
 			
 			
 	#For each requested systems, performs nstep loops to generate random SMA and Prot within their uncertainties
@@ -106,202 +106,200 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
 	progressbar = ttk.Progressbar(frame_result, variable=progress_var, maximum=nstep).grid(row=0)
 
 	def loop_function(test):
-								k = int(test)
-								progress_var.set(k)
-								frame_result.update_idletasks()
+		k = int(test)
+		progress_var.set(k)
+		frame_result.update_idletasks()
 	
 	while Nb < nstep:
-								
-								loop_function(Nb)
-								
-								arr_ai = []
-								arr_roti = []
-								arr_chi2 = []
-								arr_massp = []
-								arr_age = []
+		
+		loop_function(Nb)
+		
+		arr_ai = []
+		arr_roti = []
+		arr_chi2 = []
+		arr_massp = []
+		arr_age = []
 	
-								flag_max = 0
-								flag_min = 0
+		flag_max = 0
+		flag_min = 0
 		
-								sma_list = [0.0,0.0,0.0,0.0]
-								prot_list = [0.0,0.0,0.0,0.0] 
-								age_list = [0.0,0.0,0.0,0.0] 
-								massp_list = [0.0,0.0,0.0,0.0]  
-								masss_list = [0.0,0.0,0.0,0.0] 	
-								coef_min = [0.0,0.0,0.0,0.0] 	
-								coef_max = [0.0,0.0,0.0,0.0] 	
+		sma_list = [0.0,0.0,0.0,0.0]
+		prot_list = [0.0,0.0,0.0,0.0] 
+		age_list = [0.0,0.0,0.0,0.0] 
+		massp_list = [0.0,0.0,0.0,0.0]  
+		masss_list = [0.0,0.0,0.0,0.0] 	
+		coef_min = [0.0,0.0,0.0,0.0] 	
+		coef_max = [0.0,0.0,0.0,0.0] 	
 		
-								#random exploration on P_rot and SMA given Error_Prot and Error_SMA
-								protrand = random.uniform(protobs-sigmarot,protobs+sigmarot)
-								smarand = random.uniform(smaobs-sigmasma, smaobs+sigmasma)	
+		#random exploration on P_rot and SMA given Error_Prot and Error_SMA
+		protrand = random.uniform(protobs-sigmarot,protobs+sigmarot)
+		smarand = random.uniform(smaobs-sigmasma, smaobs+sigmasma)	
 		
-								#Find the four couples that encompass the observed (random) couple protrand-smarand
-								for index_sma in range(0,size_sma-1):
-										  if smarand >= sma[index_sma]:
-																smamin = sma[index_sma]
-																smamax = sma[index_sma+1] 
-																index_ref_sma = index_sma	
+		#Find the four couples that encompass the observed (random) couple protrand-smarand
+		for index_sma in range(0,size_sma-1):
+			if smarand >= sma[index_sma]:
+				smamin = sma[index_sma]
+				smamax = sma[index_sma+1] 
+				index_ref_sma = index_sma	
 					
-								for index_prot in range(0,size_prot-1):
-										  if protrand >= prot[index_prot]:
-																protmin = prot[index_prot]
-																protmax = prot[index_prot+1]
-																index_ref_prot = index_prot
+		for index_prot in range(0,size_prot-1):
+			if protrand >= prot[index_prot]:
+				protmin = prot[index_prot]
+				protmax = prot[index_prot+1]
+				index_ref_prot = index_prot
   				
-								#Cleaning the useful arrays  
-								#sma_list=clean(sma_list)
-								prot_list=clean(prot_list)
-								age_list=clean(age_list)
-								massp_list=clean(massp_list)
-								masss_list=clean(masss_list)
+		#Cleaning the useful arrays  
+		#sma_list=clean(sma_list)
+		prot_list=clean(prot_list)
+		age_list=clean(age_list)
+		massp_list=clean(massp_list)
+		masss_list=clean(masss_list)
 	
-								#Control on the content of the Explo_* files. If empty, try to find the next non empty file.
-								smamin,protmin,smamax,protmax,flag_empty= Control_file(frame_result,prot,sma,index_ref_prot,index_ref_sma,massstarmin,smamin,protmin,smamax,protmax)
+		#Control on the content of the Explo_* files. If empty, try to find the next non empty file.
+		smamin,protmin,smamax,protmax,flag_empty= Control_file(frame_result,prot,sma,index_ref_prot,index_ref_sma,massstarmin,smamin,protmin,smamax,protmax)
 
-								if (flag_empty == 1):
-										  return 0.0,0.0,0.0,0.0
-								
-								#Estimating the spearman correlation coefficient + the age of each corner pre-compiled Explo_* files. Here for massstarmin 
-								coef_min[0] = Find_4(floatt3(smamin),floatt2(protmin),mp,massstarmin,0,sma_list,prot_list,age_list,massp_list,masss_list)
-								coef_min[1] = Find_4(floatt3(smamax),floatt2(protmin),mp,massstarmin,1,sma_list,prot_list,age_list,massp_list,masss_list)
-								coef_min[2] = Find_4(floatt3(smamin),floatt2(protmax),mp,massstarmin,2,sma_list,prot_list,age_list,massp_list,masss_list)
-								coef_min[3] = Find_4(floatt3(smamax),floatt2(protmax),mp,massstarmin,3,sma_list,prot_list,age_list,massp_list,masss_list)
+		if (flag_empty == 1):
+			return 0.0,0.0,0.0,0.0
 		
-								#Calling Find_age to perform the 3D interpolation
-								age_min = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
+		#Estimating the spearman correlation coefficient + the age of each corner pre-compiled Explo_* files. Here for massstarmin 
+		coef_min[0] = Find_4(floatt3(smamin),floatt2(protmin),mp,massstarmin,0,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_min[1] = Find_4(floatt3(smamax),floatt2(protmin),mp,massstarmin,1,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_min[2] = Find_4(floatt3(smamin),floatt2(protmax),mp,massstarmin,2,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_min[3] = Find_4(floatt3(smamax),floatt2(protmax),mp,massstarmin,3,sma_list,prot_list,age_list,massp_list,masss_list)
 		
-								if age_min >= 0.0:
-										  flag_min = 1
-										  arr_agemod_min.append(age_min) #for massstarmin
+		#Calling Find_age to perform the 3D interpolation
+		age_min = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
+		
+		if age_min >= 0.0:
+			flag_min = 1
+			arr_agemod_min.append(age_min) #for massstarmin
 	
-								coef_min_f = np.mean(coef_min)
+		coef_min_f = np.mean(coef_min)
 	
-								#Same procedure as above but for massstarmax
-								sma_list=clean(sma_list)
-								prot_list=clean(prot_list)
-								age_list=clean(age_list)
-								massp_list=clean(massp_list)
-								masss_list=clean(masss_list)
+		#Same procedure as above but for massstarmax
+		sma_list=clean(sma_list)
+		prot_list=clean(prot_list)
+		age_list=clean(age_list)
+		massp_list=clean(massp_list)
+		masss_list=clean(masss_list)
 		
-								smamin,protmin,smamax,protmax,flag_empty= Control_file(frame_result,prot,sma,index_ref_prot,index_ref_sma,massstarmax,smamin,protmin,smamax,protmax)
+		smamin,protmin,smamax,protmax,flag_empty= Control_file(frame_result,prot,sma,index_ref_prot,index_ref_sma,massstarmax,smamin,protmin,smamax,protmax)
 
-								if (flag_empty == 1):
-										  return 0.0,0.0,0.0,0.0
-									
-								coef_max[0] = Find_4(floatt3(smamin),floatt2(protmin),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
-								coef_max[1] = Find_4(floatt3(smamax),floatt2(protmin),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
-								coef_max[2] = Find_4(floatt3(smamin),floatt2(protmax),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
-								coef_max[3] = Find_4(floatt3(smamax),floatt2(protmax),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
-	
-								age_max = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
-		
-		
-								if age_max >= 0.0:
-										  flag_max = 1
-										  arr_agemod_max.append(age_max) #for massstarmax
-		
-								coef_max_f = np.mean(coef_max)
+		if (flag_empty == 1):
+			return 0.0,0.0,0.0,0.0
 			
-								#Control on the Pearson averaged correlation coefficient. It is used to ensure a good enough linear relation between the estimated age and the 
-								#mass of the planet?
-								Nbtest = Nbtest + 1
-								if (abs(coef_min_f) > coeflim and abs(coef_max_f) > coeflim) and flag_max*flag_min == 1:
-										  print (Nb,arr_agemod_min[Nb],arr_agemod_max[Nb],coef_min_f,coef_max_f)
-										  Nb = Nb + 1
-										  Nbtest = 0
+		coef_max[0] = Find_4(floatt3(smamin),floatt2(protmin),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_max[1] = Find_4(floatt3(smamax),floatt2(protmin),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_max[2] = Find_4(floatt3(smamin),floatt2(protmax),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
+		coef_max[3] = Find_4(floatt3(smamax),floatt2(protmax),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
+	
+		age_max = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
+		
+		
+		if age_max >= 0.0:
+			flag_max = 1
+			arr_agemod_max.append(age_max) #for massstarmax
+		
+		coef_max_f = np.mean(coef_max)
+			
+		#Control on the Pearson averaged correlation coefficient. It is used to ensure a good enough linear relation between the estimated age and the 
+		#mass of the planet?
+		Nbtest = Nbtest + 1
+		if (abs(coef_min_f) > coeflim and abs(coef_max_f) > coeflim) and flag_max*flag_min == 1:
+			print (Nb,arr_agemod_min[Nb],arr_agemod_max[Nb],coef_min_f,coef_max_f)
+			Nb = Nb + 1
+			Nbtest = 0
 	
 		
-								if Nbtest == Nbtest_limit:
-										  Nbtest_step = Nbtest_step + 1
-										  if Nbtest_step > Nbtest_step_try:
-																print ("Number {} of crashes reached, stop.",Nbtest_step_try)
-																
-																charwarning = "Number "+str(Nbtest_step_try)+" of crashes reached, stop."
-																Label(frame_result,text=charwarning).grid(row=0)
-
-																#frame_result.update_idletasks()
-																return 0.0,0.0,0.0
-										  print("Limit of {} iterations reached for the system and coeflim = {}. No linear relation between the age and the mass of the planet found!".format(Nbtest_limit,coeflim))
-										  #print "Limit of",Nbtest_limit,"iterations reached for", system,"and coeflim =",coeflim, ". No linear relation between the age and the mass of the planet found!"
-										  print ("Try with reduced coeflim of {}".format(coeflim*0.95))
-										  Nbtest = 0
-										  coeflim = coeflim * 0.95
+		if Nbtest == Nbtest_limit:
+			Nbtest_step = Nbtest_step + 1
+			if Nbtest_step > Nbtest_step_try:
+				print ("Number {} of crashes reached, stop.",Nbtest_step_try)		
+				charwarning = "Number "+str(Nbtest_step_try)+" of crashes reached, stop."
+				Label(frame_result,text=charwarning).grid(row=0)
+				#frame_result.update_idletasks()
+				return 0.0,0.0,0.0
+			print("Limit of {} iterations reached for the system and coeflim = {}. No linear relation between the age and the mass of the planet found!".format(Nbtest_limit,coeflim))
+			#print "Limit of",Nbtest_limit,"iterations reached for", system,"and coeflim =",coeflim, ". No linear relation between the age and the mass of the planet found!"
+			print ("Try with reduced coeflim of {}".format(coeflim*0.95))
+			Nbtest = 0
+			coeflim = coeflim * 0.95
 				
 	################### Robustness ###################
 	
-								if robust == 1:
-										  for index_sma in range(0,size_sma-1):
-																if smarand >= sma[index_sma]:
-																				index_ref_sma = index_sma
-																				rand1 = random.uniform(0,1)
-																				rand2 = random.uniform(0,1)
-																				if rand1 >= 0.5 and index_sma>0:
-																					rand1 = 1
-																				else:
-																					rand1 = 0		
-																				if rand2 >= 0.5 and index_sma<size_sma-2 :
-																					rand2 = 1
-																				else:
-																					rand2 = 0	
+		if robust == 1:
+			for index_sma in range(0,size_sma-1):
+				if smarand >= sma[index_sma]:
+					index_ref_sma = index_sma
+					rand1 = random.uniform(0,1)
+					rand2 = random.uniform(0,1)
+					if rand1 >= 0.5 and index_sma>0:
+						rand1 = 1
+					else:
+						rand1 = 0		
+					if rand2 >= 0.5 and index_sma<size_sma-2 :
+						rand2 = 1
+					else:
+						rand2 = 0	
 		
-																				smaminrand = sma[index_sma-int(rand1)]
-																				smamaxrand = sma[index_sma+1+int(rand2)]	
+					smaminrand = sma[index_sma-int(rand1)]
+					smamaxrand = sma[index_sma+1+int(rand2)]	
 					
-										  for index_prot in range(0,size_prot-1):
-																if protrand >= prot[index_prot]:
-																				index_ref_prot = index_prot
-																				rand1 = random.uniform(0,1)
-																				rand2 = random.uniform(0,1)
-																				if rand1 >= 0.5 and index_prot>0 :
-																					rand1 = 1
-																				else:
-																					rand1 = 0
-																				if rand2 >= 0.5 and index_prot<size_prot-2:
-																					rand2 = 1
-																				else:
-																					rand2 = 0	
+			for index_prot in range(0,size_prot-1):
+				if protrand >= prot[index_prot]:
+					index_ref_prot = index_prot
+					rand1 = random.uniform(0,1)
+					rand2 = random.uniform(0,1)
+					if rand1 >= 0.5 and index_prot>0 :
+						rand1 = 1
+					else:
+						rand1 = 0
+					if rand2 >= 0.5 and index_prot<size_prot-2:
+						rand2 = 1
+					else:
+						rand2 = 0	
 						
-																				protminrand = prot[index_prot-int(rand1)]
-																				protmaxrand = prot[index_prot+1+int(rand2)]
+					protminrand = prot[index_prot-int(rand1)]
+					protmaxrand = prot[index_prot+1+int(rand2)]
 				
-										  sma_list=clean(sma_list)
-										  prot_list=clean(prot_list)
-										  age_list=clean(age_list)
-										  massp_list=clean(massp_list)
-										  masss_list=clean(masss_list)
+			sma_list=clean(sma_list)
+			prot_list=clean(prot_list)
+			age_list=clean(age_list)
+			massp_list=clean(massp_list)
+			masss_list=clean(masss_list)
 	
-										  coef_min[0] = Find_4(floatt3(smaminrand),floatt2(protminrand),mp,massstarmin,0,sma_list,prot_list,age_list,massp_list,masss_list)
-										  coef_min[1] = Find_4(floatt3(smamaxrand),floatt2(protminrand),mp,massstarmin,1,sma_list,prot_list,age_list,massp_list,masss_list)
-										  coef_min[2] = Find_4(floatt3(smaminrand),floatt2(protmaxrand),mp,massstarmin,2,sma_list,prot_list,age_list,massp_list,masss_list)
-										  coef_min[3] = Find_4(floatt3(smamaxrand),floatt2(protmaxrand),mp,massstarmin,3,sma_list,prot_list,age_list,massp_list,masss_list)
+			coef_min[0] = Find_4(floatt3(smaminrand),floatt2(protminrand),mp,massstarmin,0,sma_list,prot_list,age_list,massp_list,masss_list)
+			coef_min[1] = Find_4(floatt3(smamaxrand),floatt2(protminrand),mp,massstarmin,1,sma_list,prot_list,age_list,massp_list,masss_list)
+			coef_min[2] = Find_4(floatt3(smaminrand),floatt2(protmaxrand),mp,massstarmin,2,sma_list,prot_list,age_list,massp_list,masss_list)
+			coef_min[3] = Find_4(floatt3(smamaxrand),floatt2(protmaxrand),mp,massstarmin,3,sma_list,prot_list,age_list,massp_list,masss_list)
 	
-										  age_min = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
+			age_min = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
 		
-										  if age_min >= 0.0:
-																flag_min = 1
-																arr_agemod_min_rand.append(age_min) #for massstarmin
+			if age_min >= 0.0:
+				flag_min = 1
+				arr_agemod_min_rand.append(age_min) #for massstarmin
 	
-										  coef_min_f = np.mean(coef_min)
+			coef_min_f = np.mean(coef_min)
 			
-										  sma_list=clean(sma_list)
-										  prot_list=clean(prot_list)
-										  age_list=clean(age_list)
-										  massp_list=clean(massp_list)
-										  masss_list=clean(masss_list)
+			sma_list=clean(sma_list)
+			prot_list=clean(prot_list)
+			age_list=clean(age_list)
+			massp_list=clean(massp_list)
+			masss_list=clean(masss_list)
 	
 	
-										  coef_max[0] = Find_4(floatt3(smaminrand),floatt2(protminrand),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
-										  coef_max[1] = Find_4(floatt3(smamaxrand),floatt2(protminrand),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
-										  coef_max[2] = Find_4(floatt3(smaminrand),floatt2(protmaxrand),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
-										  coef_max[3] = Find_4(floatt3(smamaxrand),floatt2(protmaxrand),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
+			coef_max[0] = Find_4(floatt3(smaminrand),floatt2(protminrand),mp,massstarmax,0,sma_list,prot_list,age_list,massp_list,masss_list)
+			coef_max[1] = Find_4(floatt3(smamaxrand),floatt2(protminrand),mp,massstarmax,1,sma_list,prot_list,age_list,massp_list,masss_list)
+			coef_max[2] = Find_4(floatt3(smaminrand),floatt2(protmaxrand),mp,massstarmax,2,sma_list,prot_list,age_list,massp_list,masss_list)
+			coef_max[3] = Find_4(floatt3(smamaxrand),floatt2(protmaxrand),mp,massstarmax,3,sma_list,prot_list,age_list,massp_list,masss_list)
 	
-										  age_max = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
+			age_max = Find_age(smarand,protrand,sma_list,prot_list,age_list,massp_list,masss_list)
 	
-										  if age_max >= 0.0:
-																flag_max = 1
-																arr_agemod_max_rand.append(age_max) #for massstarmax
+			if age_max >= 0.0:
+				flag_max = 1
+				arr_agemod_max_rand.append(age_max) #for massstarmax
 		
-										  coef_max_f = np.mean(coef_max)
+			coef_max_f = np.mean(coef_max)
 			
 				
 	##################################################
@@ -315,15 +313,15 @@ def TATOO(frame_result, mstarobs, protobs, e_prot, mp, smaobs, e_porb, system, _
 	arr_avgage = []
 	
 	for i in range(0,Nb):
-								arr_age = [arr_agemod_min[i],arr_agemod_max[i]]
-								arr_masss = [massstarmin,massstarmax]
-								#popt, pcov = curve_fit(func_lin, np.array(arr_masss), np.array(arr_age))
-								popt = np.polyfit(np.array(arr_masss), np.array(arr_age),1)
+		arr_age = [arr_agemod_min[i],arr_agemod_max[i]]
+		arr_masss = [massstarmin,massstarmax]
+		#popt, pcov = curve_fit(func_lin, np.array(arr_masss), np.array(arr_age))
+		popt = np.polyfit(np.array(arr_masss), np.array(arr_age),1)
 	
-								a = popt[0]
-								b = popt[1]
-								arr_avgage.append(a*mstarobs + b)
-								#print("pcov=",pcov)
+		a = popt[0]
+		b = popt[1]
+		arr_avgage.append(a*mstarobs + b)
+		#print("pcov=",pcov)
 		
 	age_med_avg = np.median(arr_avgage, 0)
 	std_age_avg = np.std(arr_avgage)
