@@ -17,7 +17,6 @@ def is_number(s):
 	except ValueError:
 		return False
 
-
 master = Tk()
 master.title("TATOO v1")
 
@@ -34,12 +33,10 @@ frame_result.grid(row = 5, column = 1, columnspan = 4)
 def alert():
 	print("Ok")
 	
-
 def message(msg):
 	download_message.configure(text=msg)
 	download_message.grid(row=1)
 	frame_result.update_idletasks()
-
 
 download_message = Label(frame_result)
 def download():
@@ -102,16 +99,12 @@ test.insert("insert", "M", "", "star", "subscript", " =")
 test.configure(state="disabled")
 #test.pack()
 
-
-
-
 Label(frame1,text="Mstar",width = 10,anchor='e').grid(row=0,column = 0, sticky = E)
 Label(frame1,text="Prot =",width = 10,anchor='e').grid(row=1,column = 0, sticky = E)
 Label(frame1,text="Error_prot =",width = 10,anchor='e').grid(row=2,column = 0, sticky = E)
 Label(frame1,text="Mp =",width = 10,anchor='e').grid(row=0,column = 2, sticky = E)
 Label(frame1,text="Porb =",width = 10,anchor='e').grid(row=1,column = 2, sticky = E)
 Label(frame1,text="Error_porb =",width = 10,anchor='e').grid(row=2,column = 2, sticky = E)
-
 
 mstar = Entry(frame1, width = 8)
 mstar.insert(0, 0.71)
@@ -142,7 +135,6 @@ e_porb.grid(row=2, column=3, sticky = W)
 #frame1.pack()
 
 #frame_result.pack()
-
 
 def saisie():
 	print("\nControl on initial parameters")
@@ -235,10 +227,6 @@ def run():
 				charage = "Age of the system = "+str(round(age,2))+" +- "+str(round(e_age,2))+" Myr"
 				labelage_tidal = Label(frame_result,text=charage)
 				labelage_tidal.grid(row=0)
-				
-
-
-
 	else:
 		message("Download data first")
  
