@@ -79,7 +79,7 @@ To download the file from Google Drive via command line, an easy way is to use g
     
     pip install gdown
     cd ./Data/
-    gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
+    gdown --id 10SCb8cfI3o86AQiiM9_-itCF1PZUtT7v
     tar zxvf Data.tar.gz
     rm Data.tar.gz
     cd ../
@@ -88,11 +88,11 @@ This file contain six folders (0.5Msol | 0.6Msol | 0.7Msol | 0.8Msol | 0.9Msol |
 
 In each of them there are 480 files named Explo_100_sma_prot_sort.dat
 
-.. https://drive.google.com/open?id=1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
+.. https://drive.google.com/open?id=10SCb8cfI3o86AQiiM9_-itCF1PZUtT7v
 
 .. The id of the file is
 
-.. id = 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO
+.. id = 10SCb8cfI3o86AQiiM9_-itCF1PZUtT7v
 
 It should be extracted in the Data folder.
 
