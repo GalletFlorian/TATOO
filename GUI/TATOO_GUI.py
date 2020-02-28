@@ -53,7 +53,7 @@ def download():
 		os.system(mkdir)
 		os.chdir("../Data/")	
 		os.system("pwd")
-		dl = "gdown --id 1VlQa1eEuAZOJp2OXijK8zh5RIvhjCRZO"
+		dl = "gdown --id 10SCb8cfI3o86AQiiM9_-itCF1PZUtT7v"
 		os.system(dl)
 		message("Data.tar.gz downloaded.Extraction of file.")
 		extract = "tar zxvf Data.tar.gz"
@@ -66,8 +66,8 @@ def download():
 		download_message.destroy()
 		
 def help_tatoo():
-	print("© Florian Gallet 2019")
-	print("Gallet 2020, A&A")
+	print("© Florian Gallet 2020")
+	print("Florian Gallet 2020, A&A")
 	webbrowser.open_new(r"https://github.com/GalletFlorian/TATOO/blob/master/README.rst")
 
 menubar = Menu(master)
