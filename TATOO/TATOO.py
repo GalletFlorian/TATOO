@@ -29,7 +29,7 @@ size_prot = len(prot)
 size_sma = len(sma)
 
 #Input parameter: 
-# 1) Semi-major axis (SMA) in au 
+# 1) Planetary orbital period (Porb) in days 
 # 2) Stellar rotation period (Prot) in days
 # 3) Mass of the planet in Mjup
 # 4) Mass of the star in Msun
