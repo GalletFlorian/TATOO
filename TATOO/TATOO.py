@@ -36,11 +36,11 @@ size_sma = len(sma)
 # Optional
 # 5) Name of the system
 # 6) Error_Prot in days
-# 7) Error_SMA in au
+# 7) Error_Porb in days
 
 if len(sys.argv) < 4:
 	print("Not enouth information")
-	print("TATOO needs: Porb_obs |  Prot_obs | M_planet | M_star  (| Name of the system | Error_P_rot | Error_SMA)")
+	print("TATOO needs: Porb_obs |  Prot_obs | M_planet | M_star  (| Name of the system | Error_Prot | Error_Porb)")
 	sys.exit()
 	
 
