@@ -71,7 +71,7 @@ For tkinter (used for the GUI version of *TATOO*) I recommand you to use Anacond
 Data
 ----
 
-You'll also need to download the pre-compiled exploration files (Data.tar.gz | 343.9 Mo).
+You'll also need to download the pre-compiled exploration files (Data.tar.gz | 344.4 Mo).
 
 To download the file from Google Drive via command line, an easy way is to use gdown (https://github.com/circulosmeos/gdown.pl). You can install it via pip:
 
