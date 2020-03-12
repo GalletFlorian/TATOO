@@ -99,7 +99,7 @@ test.insert("insert", "M", "", "star", "subscript", " =")
 test.configure(state="disabled")
 #test.pack()
 
-Label(frame1,text="Mstar",width = 10,anchor='e').grid(row=0,column = 0, sticky = E)
+Label(frame1,text="Mstar =",width = 10,anchor='e').grid(row=0,column = 0, sticky = E)
 Label(frame1,text="Prot =",width = 10,anchor='e').grid(row=1,column = 0, sticky = E)
 Label(frame1,text="Error_prot =",width = 10,anchor='e').grid(row=2,column = 0, sticky = E)
 Label(frame1,text="Mp =",width = 10,anchor='e').grid(row=0,column = 2, sticky = E)
