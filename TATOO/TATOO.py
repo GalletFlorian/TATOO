@@ -101,7 +101,7 @@ gyro = 1
 
 
 #The minimum value of the spearmanr coefficient.
-coeflim = 0.2
+coeflim = 0.7
 
 
 #Number of try before crash
