@@ -76,7 +76,10 @@ if (args.error_prot == None):
 	sigmarot = 0.4	
 else:
 	sigmarot = float(args.error_prot)
-
+	if (protobs+sigmarot >= prot[-2]):
+		print("WARNING: the choose Error_Prot produce a Prot outside of the bound.")
+		sigmarot = prot[-2] - protobs
+		
 
 if (args.error_porb == None):
 	print("Standard Error_Porb = 1e-3 days")
