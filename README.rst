@@ -134,4 +134,5 @@ References
 
 Gallet, F., Bolmont, E., Bouvier, J., Mathis, S., & Charbonnel, C. 2018, A&A, 619, A80
 
+
 Gallet, F. & Delorme, P. 2019, A&A, 626, A120
