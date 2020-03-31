@@ -122,3 +122,15 @@ python3.5 TATOO_GUI.py
 | Nb_step: Number of age estimations for the standard deviation of the age
 
 
+Acknowledgements
+----------------
+
+Please cite Gallet 2020 if you use this tool.
+
+
+References
+----------
+
+
+Gallet, F., Bolmont, E., Bouvier, J., Mathis, S., & Charbonnel, C. 2018, A&A, 619, A80
+Gallet, F. & Delorme, P. 2019, A&A, 626, A120
