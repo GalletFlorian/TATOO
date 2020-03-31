@@ -76,10 +76,6 @@ if (args.error_prot == None):
 	sigmarot = 0.4	
 else:
 	sigmarot = float(args.error_prot)
-	if (protobs+sigmarot >= prot[-2]):
-		print("WARNING: the choose Error_Prot produce a Prot outside of the bound.")
-		sigmarot = prot[-2] - protobs
-		
 
 if (args.error_porb == None):
 	print("Standard Error_Porb = 1e-3 days")
@@ -87,7 +83,7 @@ if (args.error_porb == None):
 else:
 	sigmaporb = float(args.error_porb)	
 	sigmasma =  ( (sigmaporb * 24.*3600. / (2*pi))**2.0 * G * (mstarobs*Msun+mp*Mjup))**(1./3.) / 1.49598e11	
-
+		
 
 #Number of age estimations for a given system. 
 nstep = 100
@@ -149,9 +145,20 @@ while Nb < nstep:
 	coef_min = [0.0,0.0,0.0,0.0] 	
 	coef_max = [0.0,0.0,0.0,0.0] 	
 	
+	protrand = -100
+	smarand = -100
+	fail = 0 
 	#random exploration on P_rot and SMA given Error_Prot and Error_SMA
-	protrand = random.uniform(protobs-sigmarot,protobs+sigmarot)
-	smarand = random.uniform(smaobs-sigmasma, smaobs+sigmasma)	
+	while(protrand <= prot[0] or protrand >= prot[-1]): 
+		protrand = random.uniform(protobs-sigmarot,protobs+sigmarot)
+		fail += 1 
+		if(fail > 5):
+			exit()
+	while(smarand <= sma[0] or smarand >= sma[-1]): 	
+		smarand = random.uniform(smaobs-sigmasma, smaobs+sigmasma)
+		fail += 1 	
+		if(fail > 5):
+			exit()
 	
 	#Find the four couples that encompass the observed (random) couple protrand-smarand
 	for index_sma in range(0,size_sma-1):
@@ -166,6 +173,7 @@ while Nb < nstep:
 			protmin = prot[index_prot]
 			protmax = prot[index_prot+1]
 			index_ref_prot = index_prot
+	
 					
 	#Cleaning the useful arrays  
 	sma_list=clean(sma_list)
@@ -317,6 +325,7 @@ while Nb < nstep:
 			arr_agemod_max_rand.append(age_max) #for massstarmax
 	
 		coef_max_f = np.mean(coef_max)
+		
 		
 		
 	
